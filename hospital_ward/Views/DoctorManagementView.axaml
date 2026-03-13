@@ -1,0 +1,48 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:vm="using:MyFirstApp.ViewModels"
+             mc:Ignorable="d" d:DesignWidth="900" d:DesignHeight="600"
+             x:Class="MyFirstApp.Views.DoctorManagementView"
+             x:DataType="vm:DoctorManagementViewModel">
+    <Grid RowDefinitions="Auto, Auto, *, Auto" Margin="24">
+        <TextBlock Text="医生管理" FontSize="28" FontWeight="Bold" Margin="0,0,0,16"/>
+        <StackPanel Grid.Row="1" Orientation="Horizontal" Margin="0,0,0,16" Spacing="10">
+            <TextBox Width="220" Watermark="搜索医生姓名/科室..." Text="{Binding SearchText}"/>
+            <Button Content="添加医生" Command="{Binding AddCommand}" Background="#27AE60" Foreground="White" Padding="12,6"/>
+            <Button Content="编辑" Command="{Binding EditCommand}" Background="#2980B9" Foreground="White" Padding="12,6"/>
+            <Button Content="删除" Command="{Binding DeleteCommand}" Background="#E74C3C" Foreground="White" Padding="12,6"/>
+        </StackPanel>
+        <DataGrid Grid.Row="2" ItemsSource="{Binding FilteredItems}" SelectedItem="{Binding SelectedItem}"
+                  AutoGenerateColumns="False" IsReadOnly="True" CanUserResizeColumns="True"
+                  GridLinesVisibility="Horizontal" BorderThickness="1" BorderBrush="#E0E0E0" CornerRadius="6">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="姓名" Binding="{Binding Name}" Width="100"/>
+                <DataGridTextColumn Header="性别" Binding="{Binding Gender}" Width="60"/>
+                <DataGridTextColumn Header="科室" Binding="{Binding Department}" Width="*"/>
+                <DataGridTextColumn Header="职称" Binding="{Binding Title}" Width="*"/>
+                <DataGridTextColumn Header="联系电话" Binding="{Binding Phone}" Width="130"/>
+            </DataGrid.Columns>
+        </DataGrid>
+        <Border Grid.Row="3" IsVisible="{Binding IsEditing}" Background="#F7F9FC"
+                CornerRadius="8" Padding="16" Margin="0,12,0,0" BorderBrush="#D5D8DC" BorderThickness="1">
+            <StackPanel Spacing="10">
+                <TextBlock Text="编辑医生信息" FontWeight="Bold" FontSize="16"/>
+                <StackPanel Orientation="Horizontal" Spacing="12">
+                    <StackPanel><TextBlock Text="姓名" FontSize="12" Foreground="Gray"/><TextBox Width="120" Text="{Binding EditName}"/></StackPanel>
+                    <StackPanel><TextBlock Text="性别" FontSize="12" Foreground="Gray"/>
+                        <ComboBox Width="80" SelectedItem="{Binding EditGender}"><ComboBoxItem Content="男"/><ComboBoxItem Content="女"/></ComboBox>
+                    </StackPanel>
+                    <StackPanel><TextBlock Text="科室" FontSize="12" Foreground="Gray"/><TextBox Width="120" Text="{Binding EditDepartment}"/></StackPanel>
+                    <StackPanel><TextBlock Text="职称" FontSize="12" Foreground="Gray"/><TextBox Width="120" Text="{Binding EditTitle}"/></StackPanel>
+                    <StackPanel><TextBlock Text="联系电话" FontSize="12" Foreground="Gray"/><TextBox Width="140" Text="{Binding EditPhone}"/></StackPanel>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal" Spacing="10">
+                    <Button Content="保存" Command="{Binding SaveCommand}" Background="#27AE60" Foreground="White" Padding="16,6"/>
+                    <Button Content="取消" Command="{Binding CancelCommand}" Background="#95A5A6" Foreground="White" Padding="16,6"/>
+                </StackPanel>
+            </StackPanel>
+        </Border>
+    </Grid>
+</UserControl>

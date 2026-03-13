@@ -1,0 +1,47 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:vm="using:MyFirstApp.ViewModels"
+             mc:Ignorable="d" d:DesignWidth="900" d:DesignHeight="600"
+             x:Class="MyFirstApp.Views.MedicationView"
+             x:DataType="vm:MedicationViewModel">
+    <Grid RowDefinitions="Auto, Auto, *, Auto" Margin="24">
+        <TextBlock Text="用药信息" FontSize="28" FontWeight="Bold" Margin="0,0,0,16"/>
+        <StackPanel Grid.Row="1" Orientation="Horizontal" Margin="0,0,0,16" Spacing="10">
+            <TextBox Width="220" Watermark="搜索患者/药品/医生..." Text="{Binding SearchText}"/>
+            <Button Content="新增记录" Command="{Binding AddCommand}" Background="#27AE60" Foreground="White" Padding="12,6"/>
+            <Button Content="编辑" Command="{Binding EditCommand}" Background="#2980B9" Foreground="White" Padding="12,6"/>
+            <Button Content="删除" Command="{Binding DeleteCommand}" Background="#E74C3C" Foreground="White" Padding="12,6"/>
+        </StackPanel>
+        <DataGrid Grid.Row="2" ItemsSource="{Binding FilteredItems}" SelectedItem="{Binding SelectedItem}"
+                  AutoGenerateColumns="False" IsReadOnly="True" CanUserResizeColumns="True"
+                  GridLinesVisibility="Horizontal" BorderThickness="1" BorderBrush="#E0E0E0" CornerRadius="6">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="患者姓名" Binding="{Binding PatientName}" Width="100"/>
+                <DataGridTextColumn Header="药品名称" Binding="{Binding MedicationName}" Width="*"/>
+                <DataGridTextColumn Header="剂量" Binding="{Binding Dosage}" Width="80"/>
+                <DataGridTextColumn Header="频次" Binding="{Binding Frequency}" Width="100"/>
+                <DataGridTextColumn Header="开药医生" Binding="{Binding Doctor}" Width="100"/>
+                <DataGridTextColumn Header="日期" Binding="{Binding Date, StringFormat=\{0:yyyy-MM-dd\}}" Width="110"/>
+            </DataGrid.Columns>
+        </DataGrid>
+        <Border Grid.Row="3" IsVisible="{Binding IsEditing}" Background="#F7F9FC"
+                CornerRadius="8" Padding="16" Margin="0,12,0,0" BorderBrush="#D5D8DC" BorderThickness="1">
+            <StackPanel Spacing="10">
+                <TextBlock Text="编辑用药信息" FontWeight="Bold" FontSize="16"/>
+                <StackPanel Orientation="Horizontal" Spacing="12">
+                    <StackPanel><TextBlock Text="患者姓名" FontSize="12" Foreground="Gray"/><TextBox Width="120" Text="{Binding EditPatientName}"/></StackPanel>
+                    <StackPanel><TextBlock Text="药品名称" FontSize="12" Foreground="Gray"/><TextBox Width="140" Text="{Binding EditMedicationName}"/></StackPanel>
+                    <StackPanel><TextBlock Text="剂量" FontSize="12" Foreground="Gray"/><TextBox Width="80" Text="{Binding EditDosage}"/></StackPanel>
+                    <StackPanel><TextBlock Text="频次" FontSize="12" Foreground="Gray"/><TextBox Width="100" Text="{Binding EditFrequency}"/></StackPanel>
+                    <StackPanel><TextBlock Text="开药医生" FontSize="12" Foreground="Gray"/><TextBox Width="120" Text="{Binding EditDoctor}"/></StackPanel>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal" Spacing="10">
+                    <Button Content="保存" Command="{Binding SaveCommand}" Background="#27AE60" Foreground="White" Padding="16,6"/>
+                    <Button Content="取消" Command="{Binding CancelCommand}" Background="#95A5A6" Foreground="White" Padding="16,6"/>
+                </StackPanel>
+            </StackPanel>
+        </Border>
+    </Grid>
+</UserControl>

@@ -1,0 +1,50 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:vm="using:MyFirstApp.ViewModels"
+             mc:Ignorable="d" d:DesignWidth="900" d:DesignHeight="600"
+             x:Class="MyFirstApp.Views.WardManagementView"
+             x:DataType="vm:WardManagementViewModel">
+    <Grid RowDefinitions="Auto, Auto, *, Auto" Margin="24">
+        <TextBlock Text="病房管理" FontSize="28" FontWeight="Bold" Margin="0,0,0,16"/>
+        <StackPanel Grid.Row="1" Orientation="Horizontal" Margin="0,0,0,16" Spacing="10">
+            <TextBox Width="220" Watermark="搜索病房号/科室/类型..." Text="{Binding SearchText}"/>
+            <Button Content="添加病房" Command="{Binding AddCommand}" Background="#27AE60" Foreground="White" Padding="12,6"/>
+            <Button Content="编辑" Command="{Binding EditCommand}" Background="#2980B9" Foreground="White" Padding="12,6"/>
+            <Button Content="删除" Command="{Binding DeleteCommand}" Background="#E74C3C" Foreground="White" Padding="12,6"/>
+        </StackPanel>
+        <DataGrid Grid.Row="2" ItemsSource="{Binding FilteredItems}" SelectedItem="{Binding SelectedItem}"
+                  AutoGenerateColumns="False" IsReadOnly="True" CanUserResizeColumns="True"
+                  GridLinesVisibility="Horizontal" BorderThickness="1" BorderBrush="#E0E0E0" CornerRadius="6">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="病房号" Binding="{Binding WardNumber}" Width="*"/>
+                <DataGridTextColumn Header="类型" Binding="{Binding Type}" Width="80"/>
+                <DataGridTextColumn Header="床位数" Binding="{Binding BedCount}" Width="80"/>
+                <DataGridTextColumn Header="所属科室" Binding="{Binding Department}" Width="*"/>
+            </DataGrid.Columns>
+        </DataGrid>
+        <Border Grid.Row="3" IsVisible="{Binding IsEditing}" Background="#F7F9FC"
+                CornerRadius="8" Padding="16" Margin="0,12,0,0" BorderBrush="#D5D8DC" BorderThickness="1">
+            <StackPanel Spacing="10">
+                <TextBlock Text="编辑病房信息" FontWeight="Bold" FontSize="16"/>
+                <StackPanel Orientation="Horizontal" Spacing="12">
+                    <StackPanel><TextBlock Text="病房号" FontSize="12" Foreground="Gray"/><TextBox Width="150" Text="{Binding EditWardNumber}"/></StackPanel>
+                    <StackPanel><TextBlock Text="类型" FontSize="12" Foreground="Gray"/>
+                        <ComboBox Width="100" SelectedItem="{Binding EditType}">
+                            <ComboBoxItem Content="普通"/><ComboBoxItem Content="VIP"/><ComboBoxItem Content="ICU"/>
+                        </ComboBox>
+                    </StackPanel>
+                    <StackPanel><TextBlock Text="床位数" FontSize="12" Foreground="Gray"/>
+                        <NumericUpDown Width="100" Value="{Binding EditBedCount}" Minimum="0" Maximum="20"/>
+                    </StackPanel>
+                    <StackPanel><TextBlock Text="所属科室" FontSize="12" Foreground="Gray"/><TextBox Width="150" Text="{Binding EditDepartment}"/></StackPanel>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal" Spacing="10">
+                    <Button Content="保存" Command="{Binding SaveCommand}" Background="#27AE60" Foreground="White" Padding="16,6"/>
+                    <Button Content="取消" Command="{Binding CancelCommand}" Background="#95A5A6" Foreground="White" Padding="16,6"/>
+                </StackPanel>
+            </StackPanel>
+        </Border>
+    </Grid>
+</UserControl>

@@ -1,0 +1,84 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:vm="using:MyFirstApp.ViewModels"
+             mc:Ignorable="d" d:DesignWidth="900" d:DesignHeight="600"
+             x:Class="MyFirstApp.Views.PatientManagementView"
+             x:DataType="vm:PatientManagementViewModel">
+    <Grid RowDefinitions="Auto, Auto, *, Auto" Margin="24">
+        <TextBlock Text="患者管理" FontSize="28" FontWeight="Bold" Margin="0,0,0,16"/>
+
+        <StackPanel Grid.Row="1" Orientation="Horizontal" Margin="0,0,0,16" Spacing="10">
+            <TextBox Width="220" Watermark="搜索患者姓名/床位..." Text="{Binding SearchText}"/>
+            <Button Content="添加患者" Command="{Binding AddCommand}" Background="#27AE60" Foreground="White" Padding="12,6"/>
+            <Button Content="编辑" Command="{Binding EditCommand}" Background="#2980B9" Foreground="White" Padding="12,6"/>
+            <Button Content="删除" Command="{Binding DeleteCommand}" Background="#E74C3C" Foreground="White" Padding="12,6"/>
+        </StackPanel>
+
+        <DataGrid Grid.Row="2" ItemsSource="{Binding FilteredItems}" SelectedItem="{Binding SelectedItem}"
+                  AutoGenerateColumns="False" IsReadOnly="True" CanUserResizeColumns="True"
+                  GridLinesVisibility="Horizontal" BorderThickness="1" BorderBrush="#E0E0E0" CornerRadius="6">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="姓名" Binding="{Binding Name}" Width="80"/>
+                <DataGridTextColumn Header="性别" Binding="{Binding Gender}" Width="50"/>
+                <DataGridTextColumn Header="年龄" Binding="{Binding Age}" Width="50"/>
+                <DataGridTextColumn Header="联系电话" Binding="{Binding Phone}" Width="120"/>
+                <DataGridTextColumn Header="床位号" Binding="{Binding BedNumber}" Width="90"/>
+                <DataGridTextColumn Header="科室" Binding="{Binding DepartmentName}" Width="80"/>
+                <DataGridTextColumn Header="状态" Binding="{Binding Status}" Width="60"/>
+            </DataGrid.Columns>
+        </DataGrid>
+
+        <Border Grid.Row="3" IsVisible="{Binding IsEditing}" Background="#F7F9FC"
+                CornerRadius="8" Padding="16" Margin="0,12,0,0" BorderBrush="#D5D8DC" BorderThickness="1">
+            <StackPanel Spacing="10">
+                <TextBlock Text="编辑患者信息" FontWeight="Bold" FontSize="16"/>
+                <WrapPanel Orientation="Horizontal">
+                    <StackPanel Margin="0,0,12,8">
+                        <TextBlock Text="姓名" FontSize="12" Foreground="Gray"/>
+                        <TextBox Width="120" Text="{Binding EditName}"/>
+                    </StackPanel>
+                    <StackPanel Margin="0,0,12,8">
+                        <TextBlock Text="性别" FontSize="12" Foreground="Gray"/>
+                        <ComboBox Width="80" SelectedItem="{Binding EditGender}">
+                            <ComboBoxItem Content="男"/>
+                            <ComboBoxItem Content="女"/>
+                        </ComboBox>
+                    </StackPanel>
+                    <StackPanel Margin="0,0,12,8">
+                        <TextBlock Text="年龄" FontSize="12" Foreground="Gray"/>
+                        <NumericUpDown Width="100" Value="{Binding EditAge}" Minimum="0" Maximum="150"/>
+                    </StackPanel>
+                    <StackPanel Margin="0,0,12,8">
+                        <TextBlock Text="联系电话" FontSize="12" Foreground="Gray"/>
+                        <TextBox Width="140" Text="{Binding EditPhone}"/>
+                    </StackPanel>
+                    <StackPanel Margin="0,0,12,8">
+                        <TextBlock Text="身份证号" FontSize="12" Foreground="Gray"/>
+                        <TextBox Width="180" Text="{Binding EditIdCard}"/>
+                    </StackPanel>
+                    <StackPanel Margin="0,0,12,8">
+                        <TextBlock Text="床位号" FontSize="12" Foreground="Gray"/>
+                        <TextBox Width="120" Text="{Binding EditBedNumber}"/>
+                    </StackPanel>
+                    <StackPanel Margin="0,0,12,8">
+                        <TextBlock Text="科室" FontSize="12" Foreground="Gray"/>
+                        <TextBox Width="120" Text="{Binding EditDepartmentName}"/>
+                    </StackPanel>
+                    <StackPanel Margin="0,0,12,8">
+                        <TextBlock Text="状态" FontSize="12" Foreground="Gray"/>
+                        <ComboBox Width="100" SelectedItem="{Binding EditStatus}">
+                            <ComboBoxItem Content="在院"/>
+                            <ComboBoxItem Content="出院"/>
+                        </ComboBox>
+                    </StackPanel>
+                </WrapPanel>
+                <StackPanel Orientation="Horizontal" Spacing="10">
+                    <Button Content="保存" Command="{Binding SaveCommand}" Background="#27AE60" Foreground="White" Padding="16,6"/>
+                    <Button Content="取消" Command="{Binding CancelCommand}" Background="#95A5A6" Foreground="White" Padding="16,6"/>
+                </StackPanel>
+            </StackPanel>
+        </Border>
+    </Grid>
+</UserControl>
