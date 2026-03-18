@@ -1,77 +1,112 @@
-<UserControl xmlns="https://github.com/avaloniaui"
-             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             xmlns:vm="using:MyFirstApp.ViewModels"
-             mc:Ignorable="d" d:DesignWidth="900" d:DesignHeight="600"
-             x:Class="MyFirstApp.Views.DashboardView"
-             x:DataType="vm:DashboardViewModel">
-    <Grid RowDefinitions="Auto, Auto, *" Margin="24">
-        <TextBlock Text="系统首页" FontSize="28" FontWeight="Bold" Margin="0,0,0,20"/>
-        
-        <!-- 统计卡片 -->
-        <UniformGrid Grid.Row="1" Columns="5" Rows="1" VerticalAlignment="Top">
-            <Border Background="#EBF5FB" CornerRadius="10" Padding="18" Margin="6">
-                <StackPanel>
-                    <TextBlock Text="总床位数" Foreground="#5B7083" FontSize="13"/>
-                    <TextBlock Text="{Binding TotalBeds}" FontSize="32" FontWeight="Bold" Foreground="#0078D7"/>
-                </StackPanel>
-            </Border>
-            <Border Background="#EAFAF1" CornerRadius="10" Padding="18" Margin="6">
-                <StackPanel>
-                    <TextBlock Text="空闲床位" Foreground="#5B7083" FontSize="13"/>
-                    <TextBlock Text="{Binding AvailableBeds}" FontSize="32" FontWeight="Bold" Foreground="#27AE60"/>
-                </StackPanel>
-            </Border>
-            <Border Background="#FDF2E9" CornerRadius="10" Padding="18" Margin="6">
-                <StackPanel>
-                    <TextBlock Text="占用床位" Foreground="#5B7083" FontSize="13"/>
-                    <TextBlock Text="{Binding OccupiedBeds}" FontSize="32" FontWeight="Bold" Foreground="#E67E22"/>
-                </StackPanel>
-            </Border>
-            <Border Background="#FDEDEC" CornerRadius="10" Padding="18" Margin="6">
-                <StackPanel>
-                    <TextBlock Text="今日入院" Foreground="#5B7083" FontSize="13"/>
-                    <TextBlock Text="{Binding TodayAdmissions}" FontSize="32" FontWeight="Bold" Foreground="#E74C3C"/>
-                </StackPanel>
-            </Border>
-            <Border Background="#F4ECF7" CornerRadius="10" Padding="18" Margin="6">
-                <StackPanel>
-                    <TextBlock Text="今日出院" Foreground="#5B7083" FontSize="13"/>
-                    <TextBlock Text="{Binding TodayDischarges}" FontSize="32" FontWeight="Bold" Foreground="#8E44AD"/>
-                </StackPanel>
-            </Border>
-        </UniformGrid>
+<UserControl
+    x:Class="MyFirstApp.Views.DashboardView"
+    xmlns="https://github.com/avaloniaui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:vm="using:MyFirstApp.ViewModels"
+    d:DesignHeight="600"
+    d:DesignWidth="900"
+    x:DataType="vm:DashboardViewModel"
+    mc:Ignorable="d">
 
-        <!-- 第二行统计 -->
-        <UniformGrid Grid.Row="2" Columns="4" Rows="1" VerticalAlignment="Top" Margin="0,10,0,0">
-            <Border Background="#E8F8F5" CornerRadius="10" Padding="18" Margin="6">
-                <StackPanel>
-                    <TextBlock Text="维修床位" Foreground="#5B7083" FontSize="13"/>
-                    <TextBlock Text="{Binding MaintenanceBeds}" FontSize="32" FontWeight="Bold" Foreground="#1ABC9C"/>
-                </StackPanel>
-            </Border>
-            <Border Background="#EBF5FB" CornerRadius="10" Padding="18" Margin="6">
-                <StackPanel>
-                    <TextBlock Text="在院患者" Foreground="#5B7083" FontSize="13"/>
-                    <TextBlock Text="{Binding InPatientCount}" FontSize="32" FontWeight="Bold" Foreground="#2980B9"/>
-                </StackPanel>
-            </Border>
-            <Border Background="#EAFAF1" CornerRadius="10" Padding="18" Margin="6">
-                <StackPanel>
-                    <TextBlock Text="医生数量" Foreground="#5B7083" FontSize="13"/>
-                    <TextBlock Text="{Binding DoctorCount}" FontSize="32" FontWeight="Bold" Foreground="#16A085"/>
-                </StackPanel>
-            </Border>
-            <Border Background="#FEF9E7" CornerRadius="10" Padding="18" Margin="6">
-                <StackPanel>
-                    <TextBlock Text="床位占用率" Foreground="#5B7083" FontSize="13"/>
-                    <StackPanel Orientation="Horizontal">
-                        <TextBlock Text="{Binding OccupancyRate}" FontSize="32" FontWeight="Bold" Foreground="#F39C12"/>
-                        <TextBlock Text="%" FontSize="18" FontWeight="Bold" Foreground="#F39C12" VerticalAlignment="Bottom" Margin="2,0,0,5"/>
+    <Border Background="#F9FAFB" CornerRadius="16" Margin="16" Padding="24">
+        <Grid RowDefinitions="Auto, Auto, *">
+            <TextBlock
+                Margin="0,0,0,24"
+                FontSize="28"
+                FontWeight="Bold"
+                Foreground="#111827"
+                Text="系统首页" />
+
+            <!--  统计卡片 第一行  -->
+            <UniformGrid
+                Grid.Row="1"
+                VerticalAlignment="Top"
+                Columns="5"
+                Rows="1">
+                <!-- 总床位数 -->
+                <Border Classes="glass" Margin="8" Padding="20">
+                    <StackPanel>
+                        <TextBlock Classes="glass-title" Text="总床位数" />
+                        <TextBlock Classes="glass-value" Foreground="#3B82F6" Text="{Binding TotalBeds}" />
                     </StackPanel>
-                </StackPanel>
-            </Border>
-        </UniformGrid>
-    </Grid>
+                </Border>
+                <!-- 空闲床位 -->
+                <Border Classes="glass" Margin="8" Padding="20">
+                    <StackPanel>
+                        <TextBlock Classes="glass-title" Text="空闲床位" />
+                        <TextBlock Classes="glass-value" Foreground="#10B981" Text="{Binding AvailableBeds}" />
+                    </StackPanel>
+                </Border>
+                <!-- 占用床位 -->
+                <Border Classes="glass" Margin="8" Padding="20">
+                    <StackPanel>
+                        <TextBlock Classes="glass-title" Text="占用床位" />
+                        <TextBlock Classes="glass-value" Foreground="#F59E0B" Text="{Binding OccupiedBeds}" />
+                    </StackPanel>
+                </Border>
+                <!-- 今日入院 -->
+                <Border Classes="glass" Margin="8" Padding="20">
+                    <StackPanel>
+                        <TextBlock Classes="glass-title" Text="今日入院" />
+                        <TextBlock Classes="glass-value" Foreground="#EF4444" Text="{Binding TodayAdmissions}" />
+                    </StackPanel>
+                </Border>
+                <!-- 今日出院 -->
+                <Border Classes="glass" Margin="8" Padding="20">
+                    <StackPanel>
+                        <TextBlock Classes="glass-title" Text="今日出院" />
+                        <TextBlock Classes="glass-value" Foreground="#8B5CF6" Text="{Binding TodayDischarges}" />
+                    </StackPanel>
+                </Border>
+            </UniformGrid>
+
+            <!--  统计卡片 第二行  -->
+            <UniformGrid
+                Grid.Row="2"
+                Margin="0,16,0,0"
+                VerticalAlignment="Top"
+                Columns="4"
+                Rows="1">
+                <!-- 维修床位 -->
+                <Border Classes="glass" Margin="8" Padding="20">
+                    <StackPanel>
+                        <TextBlock Classes="glass-title" Text="维修床位" />
+                        <TextBlock Classes="glass-value" Foreground="#059669" Text="{Binding MaintenanceBeds}" />
+                    </StackPanel>
+                </Border>
+                <!-- 在院患者 -->
+                <Border Classes="glass" Margin="8" Padding="20">
+                    <StackPanel>
+                        <TextBlock Classes="glass-title" Text="在院患者" />
+                        <TextBlock Classes="glass-value" Foreground="#0284C7" Text="{Binding InPatientCount}" />
+                    </StackPanel>
+                </Border>
+                <!-- 医生数量 -->
+                <Border Classes="glass" Margin="8" Padding="20">
+                    <StackPanel>
+                        <TextBlock Classes="glass-title" Text="医生数量" />
+                        <TextBlock Classes="glass-value" Foreground="#0D9488" Text="{Binding DoctorCount}" />
+                    </StackPanel>
+                </Border>
+                <!-- 床位占用率 -->
+                <Border Classes="glass" Margin="8" Padding="20">
+                    <StackPanel>
+                        <TextBlock Classes="glass-title" Text="床位占用率" />
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Classes="glass-value" Foreground="#D97706" Text="{Binding OccupancyRate}" />
+                            <TextBlock
+                                Margin="4,0,0,6"
+                                VerticalAlignment="Bottom"
+                                FontSize="18"
+                                FontWeight="Bold"
+                                Foreground="#D97706"
+                                Text="%" />
+                        </StackPanel>
+                    </StackPanel>
+                </Border>
+            </UniformGrid>
+        </Grid>
+    </Border>
 </UserControl>

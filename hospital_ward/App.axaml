@@ -12,5 +12,34 @@
     <Application.Styles>
         <FluentTheme />
         <StyleInclude Source="avares://Avalonia.Controls.DataGrid/Themes/Fluent.xaml"/>
+
+        <!-- Global Light Theme "Glass" / Card Styles -->
+        <Style Selector="Border.glass">
+            <Setter Property="Background" Value="#FFFFFF" />
+            <Setter Property="BorderBrush" Value="#E5E7EB" />
+            <Setter Property="BorderThickness" Value="1" />
+            <Setter Property="CornerRadius" Value="12" />
+            <Setter Property="BoxShadow" Value="0 8 20 0 #0A000000" />
+            <Setter Property="Transitions">
+                <Transitions>
+                    <TransformOperationsTransition Property="RenderTransform" Duration="0:0:0.25" Easing="SineEaseOut" />
+                    <BoxShadowsTransition Property="BoxShadow" Duration="0:0:0.25" Easing="SineEaseOut" />
+                </Transitions>
+            </Setter>
+        </Style>
+        <Style Selector="Border.glass:pointerover">
+            <Setter Property="RenderTransform" Value="translateY(-6px)" />
+            <Setter Property="BoxShadow" Value="0 18 36 0 #15000000" />
+        </Style>
+
+        <!-- Keep Dashboard's text colors for now -->
+        <Style Selector="TextBlock.glass-title">
+            <Setter Property="FontSize" Value="13" />
+            <Setter Property="Foreground" Value="#6B7280" />
+        </Style>
+        <Style Selector="TextBlock.glass-value">
+            <Setter Property="FontSize" Value="32" />
+            <Setter Property="FontWeight" Value="Bold" />
+        </Style>
     </Application.Styles>
 </Application>
