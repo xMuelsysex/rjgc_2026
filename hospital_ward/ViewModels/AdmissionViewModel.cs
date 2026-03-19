@@ -64,10 +64,15 @@ public partial class AdmissionViewModel : ViewModelBase
     {
         if (_isNewRecord)
         {
-            _ds.Admissions.Add(new AdmissionRecord
+            _ds.AdmissionRepo.Add(new AdmissionRecord
             {
-                Id = _ds.GenerateId(), PatientName = EditPatientName, BedNumber = EditBedNumber,
-                Department = EditDepartment, Doctor = EditDoctor, AdmissionDate = DateTime.Now, Diagnosis = EditDiagnosis
+                Id = _ds.GenerateId(),
+                PatientName = EditPatientName,
+                BedNumber = EditBedNumber,
+                Department = EditDepartment,
+                Doctor = EditDoctor,
+                AdmissionDate = DateTime.Now,
+                Diagnosis = EditDiagnosis
             });
         }
         else if (SelectedItem != null)
@@ -76,6 +81,7 @@ public partial class AdmissionViewModel : ViewModelBase
             SelectedItem.Department = EditDepartment; SelectedItem.Doctor = EditDoctor; SelectedItem.Diagnosis = EditDiagnosis;
         }
         IsEditing = false;
+        _ds.SaveChanges();
         RefreshList();
     }
 
@@ -85,7 +91,8 @@ public partial class AdmissionViewModel : ViewModelBase
     private void Delete()
     {
         if (SelectedItem == null) return;
-        _ds.Admissions.Remove(SelectedItem);
+        _ds.AdmissionRepo.Remove(SelectedItem);
+        _ds.SaveChanges();
         RefreshList();
     }
 }

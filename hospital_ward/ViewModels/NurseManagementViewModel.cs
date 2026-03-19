@@ -61,10 +61,13 @@ public partial class NurseManagementViewModel : ViewModelBase
     {
         if (_isNewRecord)
         {
-            _ds.Nurses.Add(new Nurse
+            _ds.NurseRepo.Add(new Nurse
             {
-                Id = _ds.GenerateId(), Name = EditName, Gender = EditGender,
-                Department = EditDepartment, Phone = EditPhone
+                Id = _ds.GenerateId(),
+                Name = EditName,
+                Gender = EditGender,
+                Department = EditDepartment,
+                Phone = EditPhone
             });
         }
         else if (SelectedItem != null)
@@ -73,6 +76,7 @@ public partial class NurseManagementViewModel : ViewModelBase
             SelectedItem.Department = EditDepartment; SelectedItem.Phone = EditPhone;
         }
         IsEditing = false;
+        _ds.SaveChanges();
         RefreshList();
     }
 
@@ -82,7 +86,8 @@ public partial class NurseManagementViewModel : ViewModelBase
     private void Delete()
     {
         if (SelectedItem == null) return;
-        _ds.Nurses.Remove(SelectedItem);
+        _ds.NurseRepo.Remove(SelectedItem);
+        _ds.SaveChanges();
         RefreshList();
     }
 }

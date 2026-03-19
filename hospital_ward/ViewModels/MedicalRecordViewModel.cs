@@ -63,10 +63,14 @@ public partial class MedicalRecordViewModel : ViewModelBase
     {
         if (_isNewRecord)
         {
-            _ds.MedicalRecords.Add(new MedicalRecord
+            _ds.MedicalRecordRepo.Add(new MedicalRecord
             {
-                Id = _ds.GenerateId(), PatientName = EditPatientName, Doctor = EditDoctor,
-                Date = DateTime.Now, Diagnosis = EditDiagnosis, Treatment = EditTreatment
+                Id = _ds.GenerateId(),
+                PatientName = EditPatientName,
+                Doctor = EditDoctor,
+                Date = DateTime.Now,
+                Diagnosis = EditDiagnosis,
+                Treatment = EditTreatment
             });
         }
         else if (SelectedItem != null)
@@ -75,6 +79,7 @@ public partial class MedicalRecordViewModel : ViewModelBase
             SelectedItem.Diagnosis = EditDiagnosis; SelectedItem.Treatment = EditTreatment;
         }
         IsEditing = false;
+        _ds.SaveChanges();
         RefreshList();
     }
 
@@ -84,7 +89,8 @@ public partial class MedicalRecordViewModel : ViewModelBase
     private void Delete()
     {
         if (SelectedItem == null) return;
-        _ds.MedicalRecords.Remove(SelectedItem);
+        _ds.MedicalRecordRepo.Remove(SelectedItem);
+        _ds.SaveChanges();
         RefreshList();
     }
 }

@@ -17,47 +17,47 @@ build_property.PlatformNeutralAssembly =
 build_property.EnforceExtendedAnalyzerRules = 
 build_property._SupportedPlatformList = Linux,macOS,Windows
 build_property.RootNamespace = MyFirstApp
-build_property.ProjectDir = D:\github\rjgc_2026\hospital_ward\
+build_property.ProjectDir = d:\github\rjgc_2026\hospital_ward\
 build_property.EnableComHosting = 
 build_property.EnableGeneratedComInterfaceComImportInterop = 
 build_property.EffectiveAnalysisLevelStyle = 8.0
 build_property.EnableCodeStyleSeverity = 
 
-[D:/github/rjgc_2026/hospital_ward/App.axaml]
+[d:/github/rjgc_2026/hospital_ward/App.axaml]
 build_metadata.AdditionalFiles.SourceItemGroup = AvaloniaXaml
 
-[D:/github/rjgc_2026/hospital_ward/Views/AdmissionView.axaml]
+[d:/github/rjgc_2026/hospital_ward/Views/AdmissionView.axaml]
 build_metadata.AdditionalFiles.SourceItemGroup = AvaloniaXaml
 
-[D:/github/rjgc_2026/hospital_ward/Views/BedManagementView.axaml]
+[d:/github/rjgc_2026/hospital_ward/Views/BedManagementView.axaml]
 build_metadata.AdditionalFiles.SourceItemGroup = AvaloniaXaml
 
-[D:/github/rjgc_2026/hospital_ward/Views/DashboardView.axaml]
+[d:/github/rjgc_2026/hospital_ward/Views/DashboardView.axaml]
 build_metadata.AdditionalFiles.SourceItemGroup = AvaloniaXaml
 
-[D:/github/rjgc_2026/hospital_ward/Views/DepartmentManagementView.axaml]
+[d:/github/rjgc_2026/hospital_ward/Views/DepartmentManagementView.axaml]
 build_metadata.AdditionalFiles.SourceItemGroup = AvaloniaXaml
 
-[D:/github/rjgc_2026/hospital_ward/Views/DischargeView.axaml]
+[d:/github/rjgc_2026/hospital_ward/Views/DischargeView.axaml]
 build_metadata.AdditionalFiles.SourceItemGroup = AvaloniaXaml
 
-[D:/github/rjgc_2026/hospital_ward/Views/DoctorManagementView.axaml]
+[d:/github/rjgc_2026/hospital_ward/Views/DoctorManagementView.axaml]
 build_metadata.AdditionalFiles.SourceItemGroup = AvaloniaXaml
 
-[D:/github/rjgc_2026/hospital_ward/Views/MainWindow.axaml]
+[d:/github/rjgc_2026/hospital_ward/Views/MainWindow.axaml]
 build_metadata.AdditionalFiles.SourceItemGroup = AvaloniaXaml
 
-[D:/github/rjgc_2026/hospital_ward/Views/MedicalRecordView.axaml]
+[d:/github/rjgc_2026/hospital_ward/Views/MedicalRecordView.axaml]
 build_metadata.AdditionalFiles.SourceItemGroup = AvaloniaXaml
 
-[D:/github/rjgc_2026/hospital_ward/Views/MedicationView.axaml]
+[d:/github/rjgc_2026/hospital_ward/Views/MedicationView.axaml]
 build_metadata.AdditionalFiles.SourceItemGroup = AvaloniaXaml
 
-[D:/github/rjgc_2026/hospital_ward/Views/NurseManagementView.axaml]
+[d:/github/rjgc_2026/hospital_ward/Views/NurseManagementView.axaml]
 build_metadata.AdditionalFiles.SourceItemGroup = AvaloniaXaml
 
-[D:/github/rjgc_2026/hospital_ward/Views/PatientManagementView.axaml]
+[d:/github/rjgc_2026/hospital_ward/Views/PatientManagementView.axaml]
 build_metadata.AdditionalFiles.SourceItemGroup = AvaloniaXaml
 
-[D:/github/rjgc_2026/hospital_ward/Views/WardManagementView.axaml]
+[d:/github/rjgc_2026/hospital_ward/Views/WardManagementView.axaml]
 build_metadata.AdditionalFiles.SourceItemGroup = AvaloniaXaml

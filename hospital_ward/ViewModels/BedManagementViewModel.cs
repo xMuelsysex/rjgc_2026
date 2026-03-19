@@ -70,7 +70,7 @@ public partial class BedManagementViewModel : ViewModelBase
     {
         if (_isNewRecord)
         {
-            _ds.Beds.Add(new Bed
+            _ds.BedRepo.Add(new Bed
             {
                 Id = _ds.GenerateId(),
                 BedNumber = EditBedNumber,
@@ -87,6 +87,7 @@ public partial class BedManagementViewModel : ViewModelBase
             SelectedBed.PatientName = EditPatientName;
         }
         IsEditing = false;
+        _ds.SaveChanges();
         RefreshList();
     }
 
@@ -100,7 +101,8 @@ public partial class BedManagementViewModel : ViewModelBase
     private void Delete()
     {
         if (SelectedBed == null) return;
-        _ds.Beds.Remove(SelectedBed);
+        _ds.BedRepo.Remove(SelectedBed);
+        _ds.SaveChanges();
         RefreshList();
     }
 }

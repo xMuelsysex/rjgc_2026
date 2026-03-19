@@ -59,9 +59,12 @@ public partial class DepartmentManagementViewModel : ViewModelBase
     {
         if (_isNewRecord)
         {
-            _ds.Departments.Add(new Department
+            _ds.DepartmentRepo.Add(new Department
             {
-                Id = _ds.GenerateId(), Name = EditName, Description = EditDescription, Director = EditDirector
+                Id = _ds.GenerateId(),
+                Name = EditName,
+                Description = EditDescription,
+                Director = EditDirector
             });
         }
         else if (SelectedItem != null)
@@ -69,6 +72,7 @@ public partial class DepartmentManagementViewModel : ViewModelBase
             SelectedItem.Name = EditName; SelectedItem.Description = EditDescription; SelectedItem.Director = EditDirector;
         }
         IsEditing = false;
+        _ds.SaveChanges();
         RefreshList();
     }
 
@@ -78,7 +82,8 @@ public partial class DepartmentManagementViewModel : ViewModelBase
     private void Delete()
     {
         if (SelectedItem == null) return;
-        _ds.Departments.Remove(SelectedItem);
+        _ds.DepartmentRepo.Remove(SelectedItem);
+        _ds.SaveChanges();
         RefreshList();
     }
 }

@@ -61,10 +61,13 @@ public partial class WardManagementViewModel : ViewModelBase
     {
         if (_isNewRecord)
         {
-            _ds.Wards.Add(new Ward
+            _ds.WardRepo.Add(new Ward
             {
-                Id = _ds.GenerateId(), WardNumber = EditWardNumber, Type = EditType,
-                BedCount = EditBedCount, Department = EditDepartment
+                Id = _ds.GenerateId(),
+                WardNumber = EditWardNumber,
+                Type = EditType,
+                BedCount = EditBedCount,
+                Department = EditDepartment
             });
         }
         else if (SelectedItem != null)
@@ -73,6 +76,7 @@ public partial class WardManagementViewModel : ViewModelBase
             SelectedItem.BedCount = EditBedCount; SelectedItem.Department = EditDepartment;
         }
         IsEditing = false;
+        _ds.SaveChanges();
         RefreshList();
     }
 
@@ -82,7 +86,8 @@ public partial class WardManagementViewModel : ViewModelBase
     private void Delete()
     {
         if (SelectedItem == null) return;
-        _ds.Wards.Remove(SelectedItem);
+        _ds.WardRepo.Remove(SelectedItem);
+        _ds.SaveChanges();
         RefreshList();
     }
 }

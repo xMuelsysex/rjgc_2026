@@ -64,10 +64,15 @@ public partial class MedicationViewModel : ViewModelBase
     {
         if (_isNewRecord)
         {
-            _ds.MedicationRecords.Add(new MedicationRecord
+            _ds.MedicationRecordRepo.Add(new MedicationRecord
             {
-                Id = _ds.GenerateId(), PatientName = EditPatientName, MedicationName = EditMedicationName,
-                Dosage = EditDosage, Frequency = EditFrequency, Doctor = EditDoctor, Date = DateTime.Now
+                Id = _ds.GenerateId(),
+                PatientName = EditPatientName,
+                MedicationName = EditMedicationName,
+                Dosage = EditDosage,
+                Frequency = EditFrequency,
+                Doctor = EditDoctor,
+                Date = DateTime.Now
             });
         }
         else if (SelectedItem != null)
@@ -76,6 +81,7 @@ public partial class MedicationViewModel : ViewModelBase
             SelectedItem.Dosage = EditDosage; SelectedItem.Frequency = EditFrequency; SelectedItem.Doctor = EditDoctor;
         }
         IsEditing = false;
+        _ds.SaveChanges();
         RefreshList();
     }
 
@@ -85,7 +91,8 @@ public partial class MedicationViewModel : ViewModelBase
     private void Delete()
     {
         if (SelectedItem == null) return;
-        _ds.MedicationRecords.Remove(SelectedItem);
+        _ds.MedicationRecordRepo.Remove(SelectedItem);
+        _ds.SaveChanges();
         RefreshList();
     }
 }

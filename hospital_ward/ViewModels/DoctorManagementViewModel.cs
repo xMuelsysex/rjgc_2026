@@ -63,7 +63,7 @@ public partial class DoctorManagementViewModel : ViewModelBase
     {
         if (_isNewRecord)
         {
-            _ds.Doctors.Add(new Doctor
+            _ds.DoctorRepo.Add(new Doctor
             {
                 Id = _ds.GenerateId(), Name = EditName, Gender = EditGender,
                 Department = EditDepartment, Title = EditTitle, Phone = EditPhone
@@ -75,6 +75,7 @@ public partial class DoctorManagementViewModel : ViewModelBase
             SelectedItem.Department = EditDepartment; SelectedItem.Title = EditTitle; SelectedItem.Phone = EditPhone;
         }
         IsEditing = false;
+        _ds.SaveChanges();
         RefreshList();
     }
 
@@ -84,7 +85,8 @@ public partial class DoctorManagementViewModel : ViewModelBase
     private void Delete()
     {
         if (SelectedItem == null) return;
-        _ds.Doctors.Remove(SelectedItem);
+        _ds.DoctorRepo.Remove(SelectedItem);
+        _ds.SaveChanges();
         RefreshList();
     }
 }

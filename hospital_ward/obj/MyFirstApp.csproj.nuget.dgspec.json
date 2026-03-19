@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "D:\\github\\rjgc_2026\\hospital_ward\\MyFirstApp.csproj": {}
+    "d:\\github\\rjgc_2026\\hospital_ward\\MyFirstApp.csproj": {}
   },
   "projects": {
-    "D:\\github\\rjgc_2026\\hospital_ward\\MyFirstApp.csproj": {
+    "d:\\github\\rjgc_2026\\hospital_ward\\MyFirstApp.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\github\\rjgc_2026\\hospital_ward\\MyFirstApp.csproj",
+        "projectUniqueName": "d:\\github\\rjgc_2026\\hospital_ward\\MyFirstApp.csproj",
         "projectName": "MyFirstApp",
-        "projectPath": "D:\\github\\rjgc_2026\\hospital_ward\\MyFirstApp.csproj",
+        "projectPath": "d:\\github\\rjgc_2026\\hospital_ward\\MyFirstApp.csproj",
         "packagesPath": "C:\\Users\\Muelsyse\\.nuget\\packages\\",
-        "outputPath": "D:\\github\\rjgc_2026\\hospital_ward\\obj\\",
+        "outputPath": "d:\\github\\rjgc_2026\\hospital_ward\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -77,6 +77,16 @@
             "CommunityToolkit.Mvvm": {
               "target": "Package",
               "version": "[8.2.1, )"
+            },
+            "Microsoft.EntityFrameworkCore.Design": {
+              "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[8.0.12, )"
+            },
+            "Microsoft.EntityFrameworkCore.Sqlite": {
+              "target": "Package",
+              "version": "[8.0.12, )"
             }
           },
           "imports": [

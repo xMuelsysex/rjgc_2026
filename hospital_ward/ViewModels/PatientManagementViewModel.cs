@@ -72,7 +72,7 @@ public partial class PatientManagementViewModel : ViewModelBase
     {
         if (_isNewRecord)
         {
-            _ds.Patients.Add(new Patient
+            _ds.PatientRepo.Add(new Patient
             {
                 Id = _ds.GenerateId(), Name = EditName, Gender = EditGender, Age = EditAge,
                 Phone = EditPhone, IdCard = EditIdCard, AdmissionDate = DateTime.Now,
@@ -86,6 +86,7 @@ public partial class PatientManagementViewModel : ViewModelBase
             SelectedItem.BedNumber = EditBedNumber; SelectedItem.DepartmentName = EditDepartmentName; SelectedItem.Status = EditStatus;
         }
         IsEditing = false;
+        _ds.SaveChanges();
         RefreshList();
     }
 
@@ -95,7 +96,8 @@ public partial class PatientManagementViewModel : ViewModelBase
     private void Delete()
     {
         if (SelectedItem == null) return;
-        _ds.Patients.Remove(SelectedItem);
+        _ds.PatientRepo.Remove(SelectedItem);
+        _ds.SaveChanges();
         RefreshList();
     }
 }

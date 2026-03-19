@@ -63,10 +63,14 @@ public partial class DischargeViewModel : ViewModelBase
     {
         if (_isNewRecord)
         {
-            _ds.Discharges.Add(new DischargeRecord
+            _ds.DischargeRepo.Add(new DischargeRecord
             {
-                Id = _ds.GenerateId(), PatientName = EditPatientName, BedNumber = EditBedNumber,
-                Department = EditDepartment, DischargeDate = DateTime.Now, TotalCost = EditTotalCost
+                Id = _ds.GenerateId(),
+                PatientName = EditPatientName,
+                BedNumber = EditBedNumber,
+                Department = EditDepartment,
+                DischargeDate = DateTime.Now,
+                TotalCost = EditTotalCost
             });
         }
         else if (SelectedItem != null)
@@ -75,6 +79,7 @@ public partial class DischargeViewModel : ViewModelBase
             SelectedItem.Department = EditDepartment; SelectedItem.TotalCost = EditTotalCost;
         }
         IsEditing = false;
+        _ds.SaveChanges();
         RefreshList();
     }
 
@@ -84,7 +89,8 @@ public partial class DischargeViewModel : ViewModelBase
     private void Delete()
     {
         if (SelectedItem == null) return;
-        _ds.Discharges.Remove(SelectedItem);
+        _ds.DischargeRepo.Remove(SelectedItem);
+        _ds.SaveChanges();
         RefreshList();
     }
 }
