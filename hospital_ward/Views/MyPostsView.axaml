@@ -1,0 +1,30 @@
+<UserControl
+x:Class="MyFirstApp.Views.MyPostsView"
+xmlns="https://github.com/avaloniaui"
+xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+xmlns:vm="using:MyFirstApp.ViewModels"
+x:DataType="vm:MyPostsViewModel"
+d:DesignHeight="600"
+d:DesignWidth="900"
+mc:Ignorable="d">
+    <Border Background="#F9FAFB" CornerRadius="16" Margin="16" Padding="24">
+        <StackPanel Spacing="16">
+            <TextBlock FontSize="28" FontWeight="Bold" Foreground="#111827" Text="我的发布" />
+            <ItemsControl ItemsSource="{Binding Items}">
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <Border Classes="glass" Margin="0,0,0,12" Padding="16">
+                            <StackPanel Spacing="6">
+                                <TextBlock FontSize="18" FontWeight="SemiBold" Text="{Binding Title}" />
+                                <TextBlock Foreground="#6B7280" Text="{Binding Content}" TextWrapping="Wrap" />
+                                <TextBlock Foreground="#2563EB" Text="{Binding Category}" />
+                            </StackPanel>
+                        </Border>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
+        </StackPanel>
+    </Border>
+</UserControl>

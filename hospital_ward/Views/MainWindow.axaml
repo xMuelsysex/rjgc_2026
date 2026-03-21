@@ -1,20 +1,20 @@
 <Window
-    x:Class="MyFirstApp.Views.MainWindow"
-    xmlns="https://github.com/avaloniaui"
-    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    xmlns:vm="using:MyFirstApp.ViewModels"
-    Title="智能病房管理系统"
-    Width="1200"
-    Height="750"
-    d:DesignHeight="700"
-    d:DesignWidth="1200"
-    x:DataType="vm:MainWindowViewModel"
-    Background="Transparent"
-    Icon="/Assets/avalonia-logo.ico"
-    SystemDecorations="None"
-    mc:Ignorable="d">
+x:Class="MyFirstApp.Views.MainWindow"
+xmlns="https://github.com/avaloniaui"
+xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+xmlns:vm="using:MyFirstApp.ViewModels"
+Title="智能病房管理系统"
+Width="1200"
+Height="750"
+d:DesignHeight="700"
+d:DesignWidth="1200"
+x:DataType="vm:MainWindowViewModel"
+Background="Transparent"
+Icon="/Assets/avalonia-logo.ico"
+SystemDecorations="None"
+mc:Ignorable="d">
 
     <Design.DataContext>
         <vm:MainWindowViewModel />
@@ -30,6 +30,12 @@
             <Setter Property="VerticalContentAlignment" Value="Center" />
             <Setter Property="FontSize" Value="14" />
             <Setter Property="Foreground" Value="#111827" />
+            <!-- 优化: 100ms 背景色过渡，微交互控制在100-200ms合理范围 -->
+            <Setter Property="Transitions">
+                <Transitions>
+                    <BrushTransition Property="Background" Duration="0:0:0.1" Easing="CubicEaseOut" />
+                </Transitions>
+            </Setter>
         </Style>
         <Style Selector="Button.window-button:pointerover">
             <Setter Property="Background" Value="#1A000000" />
@@ -43,165 +49,146 @@
     <Border CornerRadius="12" Background="#E2E8F0" ClipToBounds="True">
         <Grid RowDefinitions="32,*">
             <!--  Custom Title Bar  -->
-        <Grid
+            <Grid
             Grid.Row="0"
             Background="Transparent"
             ColumnDefinitions="*,Auto,Auto,Auto">
-            <Border
+                <Border
                 Grid.Column="0"
                 Background="Transparent"
                 PointerPressed="DragArea_OnPointerPressed">
-                <TextBlock
+                    <TextBlock
                     Margin="15,0,0,0"
                     VerticalAlignment="Center"
                     FontSize="12"
                     FontWeight="SemiBold"
                     Foreground="#111827"
                     Text="智能病房管理系统" />
-            </Border>
-            <Button
+                </Border>
+                <Button
                 Grid.Column="1"
                 Classes="window-button"
                 Click="MinimizeButton_OnClick"
                 Content="—" />
-            <Button
+                <Button
                 Grid.Column="2"
                 Classes="window-button"
                 Click="FullscreenButton_OnClick"
                 Content="⛶" />
-            <Button
+                <Button
                 Grid.Column="3"
                 Classes="window-button window-close"
                 Click="CloseButton_OnClick"
                 Content="✕" />
-        </Grid>
+            </Grid>
 
-        <!--  Main Content Area  -->
-        <Grid Grid.Row="1" ColumnDefinitions="220, *">
+            <!--  Main Content Area  -->
+            <Grid Grid.Row="1" ColumnDefinitions="260, *">
 
-            <!--  Sidebar Navigation  -->
-            <Border
+                <!--  Sidebar Navigation  -->
+                <Border
                 Grid.Column="0"
                 Classes="glass"
                 Margin="16,0,8,16"
-                Padding="8">
-                <ScrollViewer VerticalScrollBarVisibility="Auto">
-                    <ListBox
-                        Margin="0,10,0,0"
-                        Background="Transparent"
-                        ItemsSource="{Binding MenuItems}"
-                        SelectedItem="{Binding SelectedMenuItem}">
-                        <ListBox.ItemTemplate>
-                            <DataTemplate>
-                                <StackPanel
-                                    Margin="6,3"
-                                    Orientation="Horizontal"
-                                    Spacing="12">
-                                    <!--  Icons by IconKey  -->
-                                    <PathIcon
-                                        Width="16"
-                                        Height="16"
-                                        Foreground="#4B5563"
-                                        Data="{StaticResource HomeIcon}"
-                                        IsVisible="{Binding IconKey, Converter={x:Static ObjectConverters.Equal}, ConverterParameter='Home'}" />
-                                    <PathIcon
-                                        Width="16"
-                                        Height="16"
-                                        Foreground="#4B5563"
-                                        Data="{StaticResource BedIcon}"
-                                        IsVisible="{Binding IconKey, Converter={x:Static ObjectConverters.Equal}, ConverterParameter='Bed'}" />
-                                    <PathIcon
-                                        Width="16"
-                                        Height="16"
-                                        Foreground="#4B5563"
-                                        Data="{StaticResource PersonIcon}"
-                                        IsVisible="{Binding IconKey, Converter={x:Static ObjectConverters.Equal}, ConverterParameter='Person'}" />
-                                    <PathIcon
-                                        Width="16"
-                                        Height="16"
-                                        Foreground="#4B5563"
-                                        Data="{StaticResource DoctorIcon}"
-                                        IsVisible="{Binding IconKey, Converter={x:Static ObjectConverters.Equal}, ConverterParameter='Doctor'}" />
-                                    <PathIcon
-                                        Width="16"
-                                        Height="16"
-                                        Foreground="#4B5563"
-                                        Data="{StaticResource NurseIcon}"
-                                        IsVisible="{Binding IconKey, Converter={x:Static ObjectConverters.Equal}, ConverterParameter='Nurse'}" />
-                                    <PathIcon
-                                        Width="16"
-                                        Height="16"
-                                        Foreground="#4B5563"
-                                        Data="{StaticResource DepartmentIcon}"
-                                        IsVisible="{Binding IconKey, Converter={x:Static ObjectConverters.Equal}, ConverterParameter='Department'}" />
-                                    <PathIcon
-                                        Width="16"
-                                        Height="16"
-                                        Foreground="#4B5563"
-                                        Data="{StaticResource WardIcon}"
-                                        IsVisible="{Binding IconKey, Converter={x:Static ObjectConverters.Equal}, ConverterParameter='Ward'}" />
-                                    <PathIcon
-                                        Width="16"
-                                        Height="16"
-                                        Foreground="#4B5563"
-                                        Data="{StaticResource AdmissionIcon}"
-                                        IsVisible="{Binding IconKey, Converter={x:Static ObjectConverters.Equal}, ConverterParameter='Admission'}" />
-                                    <PathIcon
-                                        Width="16"
-                                        Height="16"
-                                        Foreground="#4B5563"
-                                        Data="{StaticResource DischargeIcon}"
-                                        IsVisible="{Binding IconKey, Converter={x:Static ObjectConverters.Equal}, ConverterParameter='Discharge'}" />
-                                    <PathIcon
-                                        Width="16"
-                                        Height="16"
-                                        Foreground="#4B5563"
-                                        Data="{StaticResource MedicalIcon}"
-                                        IsVisible="{Binding IconKey, Converter={x:Static ObjectConverters.Equal}, ConverterParameter='Medical'}" />
-                                    <PathIcon
-                                        Width="16"
-                                        Height="16"
-                                        Foreground="#4B5563"
-                                        Data="{StaticResource MedicationIcon}"
-                                        IsVisible="{Binding IconKey, Converter={x:Static ObjectConverters.Equal}, ConverterParameter='Medication'}" />
-                                    <TextBlock
-                                        VerticalAlignment="Center"
-                                        FontSize="14"
-                                        Foreground="#111827"
-                                        FontWeight="Medium"
-                                        Text="{Binding Label}" />
+                Padding="12">
+                    <StackPanel Spacing="14">
+                        <Border Padding="14" Background="#FFFFFF" CornerRadius="12">
+                            <StackPanel Spacing="12">
+                                <StackPanel Spacing="4">
+                                    <TextBlock FontSize="18" FontWeight="Bold" Foreground="#111827" Text="角色登录" />
+                                    <TextBlock Foreground="#6B7280" Text="当前登录后按角色进入对应工作台。" TextWrapping="Wrap" />
                                 </StackPanel>
-                            </DataTemplate>
-                        </ListBox.ItemTemplate>
-                        <ListBox.Styles>
-                            <Style Selector="ListBoxItem">
-                                <Setter Property="Padding" Value="8" />
-                                <Setter Property="Margin" Value="6,2" />
-                                <Setter Property="CornerRadius" Value="8" />
-                            </Style>
-                            <Style Selector="ListBoxItem:pointerover /template/ ContentPresenter">
-                                <Setter Property="Background" Value="#0A000000" />
-                            </Style>
-                            <Style Selector="ListBoxItem:selected /template/ ContentPresenter">
-                                <Setter Property="Background" Value="#1A000000" />
-                            </Style>
-                            <Style Selector="ListBoxItem:selected TextBlock">
-                                <Setter Property="Foreground" Value="#10B981" />
-                            </Style>
-                            <Style Selector="ListBoxItem:selected PathIcon">
-                                <Setter Property="Foreground" Value="#10B981" />
-                            </Style>
-                        </ListBox.Styles>
-                    </ListBox>
-                </ScrollViewer>
-            </Border>
 
-            <!--  Dynamic Content Area  -->
-            <Border Grid.Column="1" Background="Transparent" Margin="8,0,16,16">
-                <ContentControl Content="{Binding CurrentPage}" />
-            </Border>
+                                <Border Padding="12" Background="#F3F4F6" CornerRadius="10">
+                                    <StackPanel Spacing="4">
+                                        <TextBlock FontSize="16" FontWeight="SemiBold" Foreground="#111827" Text="{Binding CurrentUserName}" />
+                                        <TextBlock Foreground="#374151" Text="{Binding CurrentUserRoleName}" />
+                                        <TextBlock Foreground="#6B7280" Text="{Binding CurrentRoleDescription}" TextWrapping="Wrap" />
+                                    </StackPanel>
+                                </Border>
+                            </StackPanel>
+                        </Border>
+
+                        <ScrollViewer VerticalScrollBarVisibility="Auto">
+                            <ListBox
+                            Margin="0,4,0,0"
+                            Background="Transparent"
+                            ItemsSource="{Binding MenuItems}"
+                            SelectedItem="{Binding SelectedMenuItem}">
+                                <ListBox.ItemTemplate>
+                                    <DataTemplate>
+                                        <Grid Margin="6,3" ColumnDefinitions="Auto,*" RowDefinitions="Auto,Auto">
+                                            <PathIcon
+                                            Grid.RowSpan="2"
+                                            Width="16"
+                                            Height="16"
+                                            Margin="0,2,12,0"
+                                            Foreground="#4B5563"
+                                            Data="{Binding IconKey, Converter={StaticResource IconKeyToGeometryConverter}}" />
+                                            <TextBlock
+                                            Grid.Column="1"
+                                            VerticalAlignment="Center"
+                                            FontSize="14"
+                                            FontWeight="Medium"
+                                            Foreground="#111827"
+                                            Text="{Binding Label}" />
+                                            <TextBlock
+                                            Grid.Row="1"
+                                            Grid.Column="1"
+                                            Margin="0,2,0,0"
+                                            FontSize="11"
+                                            Foreground="#6B7280"
+                                            Text="{Binding Description}"
+                                            TextWrapping="Wrap" />
+                                        </Grid>
+                                    </DataTemplate>
+                                </ListBox.ItemTemplate>
+                                <ListBox.Styles>
+                                    <Style Selector="ListBoxItem">
+                                        <Setter Property="Padding" Value="8" />
+                                        <Setter Property="Margin" Value="6,2" />
+                                        <Setter Property="CornerRadius" Value="8" />
+                                        <!-- 优化: 150ms CubicEaseOut，hover/select背景色丝滑过渡 -->
+                                        <Setter Property="Transitions">
+                                            <Transitions>
+                                                <TransformOperationsTransition Property="RenderTransform"
+                                                                               Duration="0:0:0.15" Easing="CubicEaseOut" />
+                                            </Transitions>
+                                        </Setter>
+                                    </Style>
+                                    <!-- 优化: 微移减至1.5px，更克制自然 -->
+                                    <Style Selector="ListBoxItem:pointerover">
+                                        <Setter Property="RenderTransform" Value="translateX(1.5px)" />
+                                    </Style>
+                                    <Style Selector="ListBoxItem:pointerover /template/ ContentPresenter">
+                                        <Setter Property="Background" Value="#0A000000" />
+                                    </Style>
+                                    <Style Selector="ListBoxItem:selected /template/ ContentPresenter">
+                                        <Setter Property="Background" Value="#1A000000" />
+                                    </Style>
+                                    <Style Selector="ListBoxItem:selected TextBlock">
+                                        <Setter Property="Foreground" Value="#10B981" />
+                                    </Style>
+                                    <Style Selector="ListBoxItem:selected PathIcon">
+                                        <Setter Property="Foreground" Value="#10B981" />
+                                    </Style>
+                                </ListBox.Styles>
+                            </ListBox>
+                        </ScrollViewer>
+                    </StackPanel>
+                </Border>
+
+                <!--  Dynamic Content Area  -->
+                <!-- 优化: 单 CrossFade 300ms QuarticEaseOut，去掉PageSlide，避免大位移与淡入叠加的突兀感 -->
+                <Border Grid.Column="1" Background="Transparent" Margin="8,0,16,16">
+                    <TransitioningContentControl Content="{Binding CurrentPage}">
+                        <TransitioningContentControl.PageTransition>
+                            <CrossFade Duration="0:0:0.3" />
+                        </TransitioningContentControl.PageTransition>
+                    </TransitioningContentControl>
+                </Border>
+            </Grid>
         </Grid>
-    </Grid>
     </Border>
 
     <Window.Resources>
@@ -217,6 +204,47 @@
         <Geometry x:Key="DischargeIcon">M19,3H14.82C14.4,1.84 13.3,1 12,1C10.7,1 9.6,1.84 9.18,3H5A2,2 0 0,0 3,5V19A2,2 0 0,0 5,21H19A2,2 0 0,0 21,19V5A2,2 0 0,0 19,3M12,3A1,1 0 0,1 13,4A1,1 0 0,1 12,5A1,1 0 0,1 11,4A1,1 0 0,1 12,3M7,7H17V9H7V7M7,11H17V13H7V11M7,15H14V17H7V15Z</Geometry>
         <Geometry x:Key="MedicalIcon">M12,2L4,5V11.09C4,16.14 7.41,20.85 12,22C16.59,20.85 20,16.14 20,11.09V5L12,2M12.5,13H11V17H10V13H8.5V12H10V10H11V12H12.5V13Z</Geometry>
         <Geometry x:Key="MedicationIcon">M4.22,11.29L11.29,4.22C11.68,3.83 12.31,3.83 12.71,4.22L19.78,11.29C20.17,11.68 20.17,12.31 19.78,12.71L12.71,19.78C12.31,20.17 11.68,20.17 11.29,19.78L4.22,12.71C3.83,12.31 3.83,11.68 4.22,11.29M5.64,12L12,18.36L18.36,12L12,5.64L5.64,12M9,8H15V10L13,12V15H11V12L9,10V8Z</Geometry>
+        <Geometry x:Key="MoneyIcon">M12,3C7.03,3 3,7.03 3,12C3,16.97 7.03,21 12,21C16.97,21 21,16.97 21,12C21,7.03 16.97,3 12,3M13,17.93V20H11V17.93C9.05,17.68 7.5,16.41 7.14,14.62L9.1,13.84C9.34,15.03 10.45,15.9 12,15.9C13.66,15.9 14.5,15.1 14.5,14.19C14.5,13.21 13.96,12.47 11.81,11.95C9.42,11.38 7.77,10.42 7.77,8.37C7.77,6.64 9.15,5.19 11,4.9V3H13V4.93C14.56,5.17 15.81,6.13 16.26,7.5L14.33,8.3C14.04,7.32 13.19,6.6 11.99,6.6C10.88,6.6 9.88,7.19 9.88,8.25C9.88,9.17 10.6,9.72 12.67,10.25C14.75,10.78 16.61,11.7 16.61,14.07C16.61,15.91 15.23,17.56 13,17.93Z</Geometry>
+        <Geometry x:Key="ApprovalIcon">M19,3H14.82C14.4,1.84 13.3,1 12,1C10.7,1 9.6,1.84 9.18,3H5A2,2 0 0,0 3,5V19A2,2 0 0,0 5,21H19A2,2 0 0,0 21,19V5A2,2 0 0,0 19,3M10,17L6,13L7.41,11.59L10,14.17L16.59,7.58L18,9L10,17Z</Geometry>
+        <Geometry x:Key="OrderIcon">M19,3H5A2,2 0 0,0 3,5V19A2,2 0 0,0 5,21H19A2,2 0 0,0 21,19V5A2,2 0 0,0 19,3M17,17H7V15H17V17M17,13H7V11H17V13M17,9H7V7H17V9Z</Geometry>
+        <Geometry x:Key="CareIcon">M12,21.35L10.55,20.03C5.4,15.36 2,12.28 2,8.5C2,5.42 4.42,3 7.5,3C9.24,3 10.91,3.81 12,5.08C13.09,3.81 14.76,3 16.5,3C19.58,3 22,5.42 22,8.5C22,12.28 18.6,15.36 13.45,20.03L12,21.35Z</Geometry>
+        <Geometry x:Key="PharmacyIcon">M9.5,2A2.5,2.5 0 0,0 7,4.5V9H2.5A2.5,2.5 0 0,0 0,11.5V12.5A2.5,2.5 0 0,0 2.5,15H7V19.5A2.5,2.5 0 0,0 9.5,22H10.5A2.5,2.5 0 0,0 13,19.5V15H17.5A2.5,2.5 0 0,0 20,12.5V11.5A2.5,2.5 0 0,0 17.5,9H13V4.5A2.5,2.5 0 0,0 10.5,2H9.5M14.5,2.5L21.5,9.5L19.5,11.5L12.5,4.5L14.5,2.5M11.5,5.5L18.5,12.5L16.5,14.5L9.5,7.5L11.5,5.5Z</Geometry>
+        <Geometry x:Key="InventoryIcon">M20,8H4V6H20M20,13H4V11H20M20,18H4V16H20M2,4H22V20H2V4Z</Geometry>
+        <Geometry x:Key="DeviceIcon">M4,6H20V16H4V6M2,18H22V20H2V18M9,20H15V22H9V20Z</Geometry>
+        <Geometry x:Key="ForumIcon">M4,4H20A2,2 0 0,1 22,6V18L18,14H4A2,2 0 0,1 2,12V6A2,2 0 0,1 4,4M6,8V10H18V8H6M6,11V13H14V11H6Z</Geometry>
+        <Geometry x:Key="SettingsIcon">M12,8A4,4 0 0,1 16,12A4,4 0 0,1 12,16A4,4 0 0,1 8,12A4,4 0 0,1 12,8M3.05,13H1V11H3.05C3.27,9.75 3.76,8.58 4.46,7.58L2.96,6.08L4.37,4.67L5.87,6.17C6.87,5.47 8.04,4.98 9.29,4.76V2.71H11.29V4.76C12.54,4.98 13.71,5.47 14.71,6.17L16.21,4.67L17.62,6.08L16.12,7.58C16.82,8.58 17.31,9.75 17.53,11H19.58V13H17.53C17.31,14.25 16.82,15.42 16.12,16.42L17.62,17.92L16.21,19.33L14.71,17.83C13.71,18.53 12.54,19.02 11.29,19.24V21.29H9.29V19.24C8.04,19.02 6.87,18.53 5.87,17.83L4.37,19.33L2.96,17.92L4.46,16.42C3.76,15.42 3.27,14.25 3.05,13Z</Geometry>
+        <Geometry x:Key="ProfileIcon">M12,12A5,5 0 1,0 12,2A5,5 0 0,0 12,12M12,14C7.58,14 4,16.24 4,19V22H20V19C20,16.24 16.42,14 12,14Z</Geometry>
+        <Geometry x:Key="LockIcon">M17,8H16V6A4,4 0 0,0 8,6V8H7A2,2 0 0,0 5,10V20A2,2 0 0,0 7,22H17A2,2 0 0,0 19,20V10A2,2 0 0,0 17,8M10,6A2,2 0 0,1 14,6V8H10V6M12,17A2,2 0 1,1 14,15A2,2 0 0,1 12,17Z</Geometry>
+        <Geometry x:Key="PublishIcon">M5,4V20L12,17L19,20V4H5Z</Geometry>
+        <Geometry x:Key="FavoriteIcon">M12.1,18.55L10.65,17.22C5.4,12.36 2,9.28 2,5.5A3.5,3.5 0 0,1 5.5,2A4.1,4.1 0 0,1 9,4A4.1,4.1 0 0,1 12.5,2A3.5,3.5 0 0,1 16,5.5C16,9.28 12.6,12.36 7.35,17.22L5.9,18.55L12.1,18.55M17,4H22V6H17V4M17,8H22V10H17V8M17,12H20V14H17V12Z</Geometry>
+        <Geometry x:Key="DefaultIcon">M12,2A10,10 0 1,1 2,12A10,10 0 0,1 12,2Z</Geometry>
+        <vm:IconKeyToGeometryConverter x:Key="IconKeyToGeometryConverter"
+                                       HomeIcon="{StaticResource HomeIcon}"
+                                       BedIcon="{StaticResource BedIcon}"
+                                       PersonIcon="{StaticResource PersonIcon}"
+                                       DoctorIcon="{StaticResource DoctorIcon}"
+                                       NurseIcon="{StaticResource NurseIcon}"
+                                       DepartmentIcon="{StaticResource DepartmentIcon}"
+                                       WardIcon="{StaticResource WardIcon}"
+                                       AdmissionIcon="{StaticResource AdmissionIcon}"
+                                       DischargeIcon="{StaticResource DischargeIcon}"
+                                       MedicalIcon="{StaticResource MedicalIcon}"
+                                       MedicationIcon="{StaticResource MedicationIcon}"
+                                       MoneyIcon="{StaticResource MoneyIcon}"
+                                       ApprovalIcon="{StaticResource ApprovalIcon}"
+                                       OrderIcon="{StaticResource OrderIcon}"
+                                       CareIcon="{StaticResource CareIcon}"
+                                       PharmacyIcon="{StaticResource PharmacyIcon}"
+                                       InventoryIcon="{StaticResource InventoryIcon}"
+                                       DeviceIcon="{StaticResource DeviceIcon}"
+                                       ForumIcon="{StaticResource ForumIcon}"
+                                       SettingsIcon="{StaticResource SettingsIcon}"
+                                       ProfileIcon="{StaticResource ProfileIcon}"
+                                       LockIcon="{StaticResource LockIcon}"
+                                       PublishIcon="{StaticResource PublishIcon}"
+                                       FavoriteIcon="{StaticResource FavoriteIcon}"
+                                       DefaultIcon="{StaticResource DefaultIcon}" />
+        <vm:SystemRoleDisplayConverter x:Key="SystemRoleDisplayConverter" />
     </Window.Resources>
 
 </Window>

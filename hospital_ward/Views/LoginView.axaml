@@ -1,0 +1,31 @@
+<UserControl
+x:Class="MyFirstApp.Views.LoginView"
+xmlns="https://github.com/avaloniaui"
+xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+xmlns:vm="using:MyFirstApp.ViewModels"
+x:DataType="vm:LoginViewModel"
+d:DesignHeight="600"
+d:DesignWidth="900"
+mc:Ignorable="d">
+    <Border Background="#F3F4F6" Padding="40">
+        <Border Width="420" Padding="28" CornerRadius="16" Background="White" HorizontalAlignment="Center" VerticalAlignment="Center">
+            <StackPanel Spacing="14">
+                <TextBlock FontSize="30" FontWeight="Bold" Foreground="#111827" Text="智能病房管理系统" />
+                <TextBlock Foreground="#6B7280" Text="登录后按角色进入对应工作台" />
+                <StackPanel Spacing="6">
+                    <TextBlock Text="账号" />
+                    <TextBox Text="{Binding Username}" Watermark="请输入账号" />
+                </StackPanel>
+                <StackPanel Spacing="6">
+                    <TextBlock Text="密码" />
+                    <TextBox Text="{Binding Password}" PasswordChar="*" Watermark="请输入密码" />
+                </StackPanel>
+                <TextBlock Foreground="#2563EB" Text="{Binding StatusMessage}" TextWrapping="Wrap" />
+                <Button Padding="20,10" Background="#10B981" Foreground="White" CornerRadius="8" Command="{Binding LoginCommand}" Content="登录" />
+                <TextBlock Foreground="#6B7280" Text="管理员初始账号密码：admin / admin" />
+            </StackPanel>
+        </Border>
+    </Border>
+</UserControl>

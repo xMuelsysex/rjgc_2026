@@ -1,0 +1,35 @@
+<UserControl
+x:Class="MyFirstApp.Views.RegisterView"
+xmlns="https://github.com/avaloniaui"
+xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+xmlns:vm="using:MyFirstApp.ViewModels"
+x:DataType="vm:RegisterViewModel"
+d:DesignHeight="600"
+d:DesignWidth="900"
+mc:Ignorable="d">
+    <Border Background="#F3F4F6" Padding="40">
+        <Border Width="460" Padding="28" CornerRadius="16" Background="White" HorizontalAlignment="Center" VerticalAlignment="Center">
+            <StackPanel Spacing="12">
+                <TextBlock FontSize="28" FontWeight="Bold" Text="注册" />
+                <ComboBox ItemsSource="{Binding AvailableRoles}" SelectedItem="{Binding SelectedRole}">
+                    <ComboBox.ItemTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding Converter={StaticResource SystemRoleDisplayConverter}}" />
+                        </DataTemplate>
+                    </ComboBox.ItemTemplate>
+                </ComboBox>
+                <TextBox Text="{Binding Username}" Watermark="账号" />
+                <TextBox Text="{Binding Password}" PasswordChar="*" Watermark="密码" />
+                <TextBox Text="{Binding ConfirmPassword}" PasswordChar="*" Watermark="确认密码" />
+                <TextBox Text="{Binding DisplayName}" Watermark="姓名" />
+                <TextBox Text="{Binding Phone}" Watermark="手机号" />
+                <TextBox IsVisible="{Binding ShowDepartment}" Text="{Binding Department}" Watermark="科室（医生/护士必填）" />
+                <TextBox IsVisible="{Binding ShowIdCard}" Text="{Binding IdCard}" Watermark="身份证号（患者必填）" />
+                <TextBlock Foreground="#2563EB" Text="{Binding StatusMessage}" TextWrapping="Wrap" />
+                <Button Padding="20,10" Background="#10B981" Foreground="White" CornerRadius="8" Command="{Binding RegisterCommand}" Content="提交注册" />
+            </StackPanel>
+        </Border>
+    </Border>
+</UserControl>

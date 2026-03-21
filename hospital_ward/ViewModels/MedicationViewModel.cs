@@ -11,6 +11,7 @@ namespace MyFirstApp.ViewModels;
 public partial class MedicationViewModel : ViewModelBase
 {
     private readonly DataService _ds = DataService.Instance;
+    private readonly UserSessionService _session = UserSessionService.Instance;
 
     [ObservableProperty] private string _searchText = string.Empty;
     [ObservableProperty] private ObservableCollection<MedicationRecord> _filteredItems = new();
@@ -32,6 +33,18 @@ public partial class MedicationViewModel : ViewModelBase
     private void RefreshList()
     {
         var query = _ds.MedicationRecords.AsEnumerable();
+
+        if (_session.CurrentRole == SystemRole.Patient)
+        {
+            var patientName = _session.CurrentProfile?.DisplayName;
+            query = query.Where(m => m.PatientName == patientName);
+        }
+        else if (_session.CurrentRole == SystemRole.Doctor)
+        {
+            var doctorName = _session.CurrentProfile?.DisplayName;
+            query = query.Where(m => m.Doctor == doctorName);
+        }
+
         if (!string.IsNullOrWhiteSpace(SearchText))
         {
             var kw = SearchText.Trim();

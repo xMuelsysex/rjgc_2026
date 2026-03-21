@@ -1,6 +1,7 @@
 using System;
 using System.Collections.ObjectModel;
 using System.Linq;
+using Microsoft.Data.Sqlite;
 using Microsoft.EntityFrameworkCore;
 using MyFirstApp.Data;
 using MyFirstApp.Models;
@@ -23,8 +24,21 @@ public class DataService
     public IRepository<Bed> BedRepo { get; }
     public IRepository<AdmissionRecord> AdmissionRepo { get; }
     public IRepository<DischargeRecord> DischargeRepo { get; }
+    public IRepository<DischargeRequest> DischargeRequestRepo { get; }
     public IRepository<MedicalRecord> MedicalRecordRepo { get; }
     public IRepository<MedicationRecord> MedicationRecordRepo { get; }
+    public IRepository<PatientOrder> PatientOrderRepo { get; }
+    public IRepository<NursingRecord> NursingRecordRepo { get; }
+    public IRepository<BillingRecord> BillingRecordRepo { get; }
+    public IRepository<DrugCatalogItem> DrugCatalogItemRepo { get; }
+    public IRepository<DrugInventoryRecord> DrugInventoryRecordRepo { get; }
+    public IRepository<MedicalDevice> MedicalDeviceRepo { get; }
+    public IRepository<UserProfile> UserProfileRepo { get; }
+    public IRepository<UserCredential> UserCredentialRepo { get; }
+    public IRepository<SystemConfigEntry> SystemConfigEntryRepo { get; }
+    public IRepository<SystemAuditLog> SystemAuditLogRepo { get; }
+    public IRepository<ForumPost> ForumPostRepo { get; }
+    public IRepository<ForumFavorite> ForumFavoriteRepo { get; }
 
     // 向后兼容的快捷属性 —— ViewModel 可继续使用 _ds.Patients 等
     public ObservableCollection<Patient> Patients => PatientRepo.Items;
@@ -35,8 +49,21 @@ public class DataService
     public ObservableCollection<Bed> Beds => BedRepo.Items;
     public ObservableCollection<AdmissionRecord> Admissions => AdmissionRepo.Items;
     public ObservableCollection<DischargeRecord> Discharges => DischargeRepo.Items;
+    public ObservableCollection<DischargeRequest> DischargeRequests => DischargeRequestRepo.Items;
     public ObservableCollection<MedicalRecord> MedicalRecords => MedicalRecordRepo.Items;
     public ObservableCollection<MedicationRecord> MedicationRecords => MedicationRecordRepo.Items;
+    public ObservableCollection<PatientOrder> PatientOrders => PatientOrderRepo.Items;
+    public ObservableCollection<NursingRecord> NursingRecords => NursingRecordRepo.Items;
+    public ObservableCollection<BillingRecord> BillingRecords => BillingRecordRepo.Items;
+    public ObservableCollection<DrugCatalogItem> DrugCatalogItems => DrugCatalogItemRepo.Items;
+    public ObservableCollection<DrugInventoryRecord> DrugInventoryRecords => DrugInventoryRecordRepo.Items;
+    public ObservableCollection<MedicalDevice> MedicalDevices => MedicalDeviceRepo.Items;
+    public ObservableCollection<UserProfile> UserProfiles => UserProfileRepo.Items;
+    public ObservableCollection<UserCredential> UserCredentials => UserCredentialRepo.Items;
+    public ObservableCollection<SystemConfigEntry> SystemConfigEntries => SystemConfigEntryRepo.Items;
+    public ObservableCollection<SystemAuditLog> SystemAuditLogs => SystemAuditLogRepo.Items;
+    public ObservableCollection<ForumPost> ForumPosts => ForumPostRepo.Items;
+    public ObservableCollection<ForumFavorite> ForumFavorites => ForumFavoriteRepo.Items;
 
     private DataService()
     {
@@ -54,11 +81,33 @@ public class DataService
         BedRepo = new DbRepository<Bed>(_context);
         AdmissionRepo = new DbRepository<AdmissionRecord>(_context);
         DischargeRepo = new DbRepository<DischargeRecord>(_context);
+        DischargeRequestRepo = new DbRepository<DischargeRequest>(_context);
         MedicalRecordRepo = new DbRepository<MedicalRecord>(_context);
         MedicationRecordRepo = new DbRepository<MedicationRecord>(_context);
+        PatientOrderRepo = new DbRepository<PatientOrder>(_context);
+        NursingRecordRepo = new DbRepository<NursingRecord>(_context);
+        BillingRecordRepo = new DbRepository<BillingRecord>(_context);
+        DrugCatalogItemRepo = new DbRepository<DrugCatalogItem>(_context);
+        DrugInventoryRecordRepo = new DbRepository<DrugInventoryRecord>(_context);
+        MedicalDeviceRepo = new DbRepository<MedicalDevice>(_context);
+        UserProfileRepo = new DbRepository<UserProfile>(_context);
+        UserCredentialRepo = new DbRepository<UserCredential>(_context);
+        SystemConfigEntryRepo = new DbRepository<SystemConfigEntry>(_context);
+        SystemAuditLogRepo = new DbRepository<SystemAuditLog>(_context);
+        ForumPostRepo = new DbRepository<ForumPost>(_context);
+        ForumFavoriteRepo = new DbRepository<ForumFavorite>(_context);
 
-        // 从数据库加载数据
-        LoadAll();
+        // 从数据库加载数据；若本地旧库缺少新表，则自动重建演示库
+        try
+        {
+            LoadAll();
+        }
+        catch (SqliteException ex) when (ex.SqliteErrorCode == 1)
+        {
+            _context.Database.EnsureDeleted();
+            _context.Database.EnsureCreated();
+            LoadAll();
+        }
     }
 
     private void LoadAll()
@@ -71,8 +120,21 @@ public class DataService
         BedRepo.Load();
         AdmissionRepo.Load();
         DischargeRepo.Load();
+        DischargeRequestRepo.Load();
         MedicalRecordRepo.Load();
         MedicationRecordRepo.Load();
+        PatientOrderRepo.Load();
+        NursingRecordRepo.Load();
+        BillingRecordRepo.Load();
+        DrugCatalogItemRepo.Load();
+        DrugInventoryRecordRepo.Load();
+        MedicalDeviceRepo.Load();
+        UserProfileRepo.Load();
+        UserCredentialRepo.Load();
+        SystemConfigEntryRepo.Load();
+        SystemAuditLogRepo.Load();
+        ForumPostRepo.Load();
+        ForumFavoriteRepo.Load();
     }
 
     /// <summary>

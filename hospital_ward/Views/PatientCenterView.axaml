@@ -1,0 +1,25 @@
+<UserControl
+x:Class="MyFirstApp.Views.PatientCenterView"
+xmlns="https://github.com/avaloniaui"
+xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+xmlns:vm="using:MyFirstApp.ViewModels"
+x:DataType="vm:PatientCenterViewModel"
+d:DesignHeight="600"
+d:DesignWidth="900"
+mc:Ignorable="d">
+    <Border Background="#F9FAFB" CornerRadius="16" Margin="16" Padding="24">
+        <StackPanel Spacing="16">
+            <TextBlock FontSize="28" FontWeight="Bold" Foreground="#111827" Text="个人中心" />
+            <UniformGrid Columns="2" Rows="3">
+                <Border Classes="glass" Margin="8" Padding="18"><StackPanel><TextBlock Text="患者姓名" /><TextBlock Classes="glass-value" Text="{Binding PatientName}" /></StackPanel></Border>
+                <Border Classes="glass" Margin="8" Padding="18"><StackPanel><TextBlock Text="住院状态" /><TextBlock Classes="glass-value" Text="{Binding PatientStatus}" /></StackPanel></Border>
+                <Border Classes="glass" Margin="8" Padding="18"><StackPanel><TextBlock Text="床位号" /><TextBlock Classes="glass-value" Text="{Binding BedNumber}" /></StackPanel></Border>
+                <Border Classes="glass" Margin="8" Padding="18"><StackPanel><TextBlock Text="所属科室" /><TextBlock Classes="glass-value" Text="{Binding DepartmentName}" /></StackPanel></Border>
+                <Border Classes="glass" Margin="8" Padding="18"><StackPanel><TextBlock Text="责任医生" /><TextBlock Classes="glass-value" Text="{Binding DoctorName}" /></StackPanel></Border>
+                <Border Classes="glass" Margin="8" Padding="18"><StackPanel><TextBlock Text="责任护士" /><TextBlock Classes="glass-value" Text="{Binding NurseName}" /></StackPanel></Border>
+            </UniformGrid>
+        </StackPanel>
+    </Border>
+</UserControl>

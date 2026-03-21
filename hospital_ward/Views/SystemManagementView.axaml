@@ -1,0 +1,77 @@
+<UserControl
+x:Class="MyFirstApp.Views.SystemManagementView"
+xmlns="https://github.com/avaloniaui"
+xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+xmlns:vm="using:MyFirstApp.ViewModels"
+x:DataType="vm:SystemManagementViewModel"
+d:DesignHeight="600"
+d:DesignWidth="900"
+mc:Ignorable="d">
+
+    <Border Background="#F9FAFB" CornerRadius="16" Margin="16" Padding="24">
+        <Grid RowDefinitions="Auto,Auto,*,Auto,Auto">
+            <TextBlock Margin="0,0,0,16" FontSize="28" FontWeight="Bold" Foreground="#111827" Text="系统管理" />
+
+            <UniformGrid Grid.Row="1" Columns="2" Margin="0,0,0,16">
+                <Border Classes="glass" Margin="8" Padding="18"><StackPanel><TextBlock Text="配置项数量" /><TextBlock Classes="glass-value" Text="{Binding TotalConfigs}" /></StackPanel></Border>
+                <Border Classes="glass" Margin="8" Padding="18"><StackPanel><TextBlock Text="审计日志数" /><TextBlock Classes="glass-value" Text="{Binding TotalLogs}" /></StackPanel></Border>
+            </UniformGrid>
+
+            <Grid Grid.Row="2" ColumnDefinitions="*,*" ColumnSpacing="16">
+                <StackPanel>
+                    <StackPanel Orientation="Horizontal" Spacing="10" Margin="0,0,0,12">
+                        <TextBox Width="240" Text="{Binding SearchText}" Watermark="搜索分类/键/值..." CornerRadius="8" />
+                        <Button Padding="16,8" Background="#10B981" CornerRadius="8" Command="{Binding AddCommand}" Content="新增配置" Foreground="White" />
+                        <Button Padding="16,8" Background="#3B82F6" CornerRadius="8" Command="{Binding EditCommand}" Content="编辑" Foreground="White" />
+                        <Button Padding="16,8" Background="#EF4444" CornerRadius="8" Command="{Binding DeleteCommand}" Content="删除" Foreground="White" />
+                    </StackPanel>
+                    <DataGrid AutoGenerateColumns="False" IsReadOnly="True" ItemsSource="{Binding FilteredConfigs}" SelectedItem="{Binding SelectedConfig}">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="分类" Binding="{Binding Category}" Width="100" />
+                            <DataGridTextColumn Header="键" Binding="{Binding ConfigKey}" Width="140" />
+                            <DataGridTextColumn Header="值" Binding="{Binding ConfigValue}" Width="120" />
+                            <DataGridTextColumn Header="说明" Binding="{Binding Description}" Width="*" />
+                        </DataGrid.Columns>
+                    </DataGrid>
+                </StackPanel>
+
+                <StackPanel>
+                    <TextBlock Margin="0,0,0,12" FontSize="18" FontWeight="SemiBold" Foreground="#111827" Text="系统审计日志" />
+                    <DataGrid AutoGenerateColumns="False" IsReadOnly="True" ItemsSource="{Binding AuditLogs}">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="操作人" Binding="{Binding OperatorName}" Width="90" />
+                            <DataGridTextColumn Header="动作" Binding="{Binding Action}" Width="90" />
+                            <DataGridTextColumn Header="时间" Binding="{Binding CreatedAt, StringFormat=\{0:MM-dd HH:mm\}}" Width="110" />
+                            <DataGridTextColumn Header="详情" Binding="{Binding Detail}" Width="*" />
+                        </DataGrid.Columns>
+                    </DataGrid>
+                </StackPanel>
+            </Grid>
+
+            <Border Grid.Row="3" Margin="0,16,0,0" Padding="20" Classes="glass" IsVisible="{Binding IsEditing}">
+                <StackPanel Spacing="14">
+                    <TextBlock FontSize="18" FontWeight="Bold" Foreground="#111827" Text="编辑系统配置" />
+                    <WrapPanel ItemWidth="200" ItemHeight="72">
+                        <StackPanel Margin="0,0,16,0" Spacing="6"><TextBlock Text="分类" /><TextBox Text="{Binding EditCategory}" /></StackPanel>
+                        <StackPanel Margin="0,0,16,0" Spacing="6"><TextBlock Text="配置键" /><TextBox Text="{Binding EditConfigKey}" /></StackPanel>
+                        <StackPanel Margin="0,0,16,0" Spacing="6"><TextBlock Text="配置值" /><TextBox Text="{Binding EditConfigValue}" /></StackPanel>
+                    </WrapPanel>
+                    <StackPanel Spacing="6"><TextBlock Text="说明" /><TextBox Text="{Binding EditDescription}" AcceptsReturn="True" Height="70" TextWrapping="Wrap" /></StackPanel>
+                    <StackPanel Orientation="Horizontal" Spacing="12">
+                        <Button Padding="24,8" Background="#10B981" CornerRadius="8" Command="{Binding SaveCommand}" Content="保存" Foreground="White" />
+                        <Button Padding="24,8" Background="#9CA3AF" CornerRadius="8" Command="{Binding CancelCommand}" Content="取消" Foreground="White" />
+                    </StackPanel>
+                </StackPanel>
+            </Border>
+
+            <Border Grid.Row="4" Margin="0,16,0,0" Padding="16" Background="#EEF2FF" CornerRadius="12">
+                <StackPanel Spacing="6">
+                    <TextBlock FontSize="16" FontWeight="SemiBold" Foreground="#3730A3" Text="后台配置范围" />
+                    <TextBlock Foreground="#4338CA" Text="当前已覆盖菜单权限、字典配置、参数设置、系统日志查看等后台配置场景。" TextWrapping="Wrap" />
+                </StackPanel>
+            </Border>
+        </Grid>
+    </Border>
+</UserControl>

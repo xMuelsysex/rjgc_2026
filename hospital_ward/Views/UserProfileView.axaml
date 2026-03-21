@@ -1,0 +1,27 @@
+<UserControl
+x:Class="MyFirstApp.Views.UserProfileView"
+xmlns="https://github.com/avaloniaui"
+xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+xmlns:vm="using:MyFirstApp.ViewModels"
+x:DataType="vm:UserProfileViewModel"
+d:DesignHeight="600"
+d:DesignWidth="900"
+mc:Ignorable="d">
+    <Border Background="#F9FAFB" CornerRadius="16" Margin="16" Padding="24">
+        <StackPanel Spacing="14">
+            <TextBlock FontSize="28" FontWeight="Bold" Foreground="#111827" Text="用户资料" />
+            <TextBlock Foreground="#6B7280" Text="当前角色资料维护" />
+            <WrapPanel ItemWidth="220" ItemHeight="76">
+                <StackPanel Margin="0,0,16,0" Spacing="6"><TextBlock Text="姓名" /><TextBox Text="{Binding DisplayName}" /></StackPanel>
+                <StackPanel Margin="0,0,16,0" Spacing="6"><TextBlock Text="角色" /><TextBox IsReadOnly="True" Text="{Binding Role}" /></StackPanel>
+                <StackPanel Margin="0,0,16,0" Spacing="6"><TextBlock Text="科室" /><TextBox Text="{Binding Department}" /></StackPanel>
+                <StackPanel Margin="0,0,16,0" Spacing="6"><TextBlock Text="电话" /><TextBox Text="{Binding Phone}" /></StackPanel>
+                <StackPanel Margin="0,0,16,0" Spacing="6"><TextBlock Text="邮箱" /><TextBox Text="{Binding Email}" /></StackPanel>
+            </WrapPanel>
+            <StackPanel Spacing="6"><TextBlock Text="简介" /><TextBox Text="{Binding Bio}" AcceptsReturn="True" Height="90" TextWrapping="Wrap" /></StackPanel>
+            <Button Width="120" Padding="20,8" Background="#10B981" CornerRadius="8" Command="{Binding SaveCommand}" Content="保存资料" Foreground="White" />
+        </StackPanel>
+    </Border>
+</UserControl>

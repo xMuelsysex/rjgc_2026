@@ -1,0 +1,48 @@
+<UserControl
+x:Class="MyFirstApp.Views.RoleFeaturePageView"
+xmlns="https://github.com/avaloniaui"
+xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+xmlns:vm="using:MyFirstApp.ViewModels"
+x:DataType="vm:RoleFeaturePageViewModel"
+d:DesignHeight="600"
+d:DesignWidth="900"
+mc:Ignorable="d">
+
+    <Border Margin="16" Padding="24" Background="#F9FAFB" CornerRadius="16">
+        <StackPanel Spacing="20">
+            <StackPanel Spacing="8">
+                <TextBlock FontSize="28" FontWeight="Bold" Foreground="#111827" Text="{Binding Title}" />
+                <TextBlock FontSize="15" Foreground="#4B5563" Text="{Binding Summary}" TextWrapping="Wrap" />
+            </StackPanel>
+
+            <Border Classes="glass" Padding="18">
+                <StackPanel Spacing="10">
+                    <TextBlock Classes="glass-title" Text="适用角色" />
+                    <TextBlock Classes="glass-value" FontSize="20" Text="{Binding Audience}" />
+                </StackPanel>
+            </Border>
+
+            <Border Classes="glass" Padding="20">
+                <StackPanel Spacing="12">
+                    <TextBlock FontSize="18" FontWeight="SemiBold" Foreground="#111827" Text="页面骨架已就绪" />
+                    <TextBlock Foreground="#6B7280" Text="当前为功能占位页，可继续补充表单、列表、审批流或统计卡片。" TextWrapping="Wrap" />
+
+                    <ItemsControl ItemsSource="{Binding CapabilityItems}">
+                        <ItemsControl.ItemTemplate>
+                            <DataTemplate>
+                                <Border Margin="0,4,0,0" Padding="12,10" Background="#FFFFFF" CornerRadius="10">
+                                    <StackPanel Orientation="Horizontal" Spacing="10">
+                                        <TextBlock FontSize="16" Foreground="#10B981" Text="•" />
+                                        <TextBlock Foreground="#111827" Text="{Binding .}" TextWrapping="Wrap" />
+                                    </StackPanel>
+                                </Border>
+                            </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+                    </ItemsControl>
+                </StackPanel>
+            </Border>
+        </StackPanel>
+    </Border>
+</UserControl>
