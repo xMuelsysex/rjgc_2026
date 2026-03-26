@@ -35,6 +35,12 @@
             <Setter Property="BoxShadow" Value="0 14 28 0 #13000000" />
         </Style>
 
+        <!-- 侧栏承载滚动条，不参与悬浮位移，避免拖拽坐标与视觉位置错位 -->
+        <Style Selector="Border.glass.sidebar-shell:pointerover">
+            <Setter Property="RenderTransform" Value="translateY(0px) scale(1)" />
+            <Setter Property="BoxShadow" Value="0 4 12 0 #0D000000" />
+        </Style>
+
         <Style Selector="TextBlock.glass-title">
             <Setter Property="FontSize" Value="13" />
             <Setter Property="Foreground" Value="#6B7280" />
@@ -42,6 +48,42 @@
         <Style Selector="TextBlock.glass-value">
             <Setter Property="FontSize" Value="32" />
             <Setter Property="FontWeight" Value="Bold" />
+        </Style>
+
+        <!-- 滚动条仅保留安全的顶层尺寸配置，避免干预 Fluent 默认拖拽语义 -->
+        <Style Selector="ScrollBar#PART_VerticalScrollBar">
+            <Setter Property="AllowAutoHide" Value="True" />
+            <Setter Property="ShowDelay" Value="0:0:0.04" />
+            <Setter Property="HideDelay" Value="0:0:0.28" />
+            <Setter Property="Width" Value="14" />
+            <Setter Property="MinWidth" Value="14" />
+            <Setter Property="Margin" Value="0,6,4,6" />
+            <Setter Property="Background" Value="Transparent" />
+            <Setter Property="BorderBrush" Value="Transparent" />
+        </Style>
+
+        <Style Selector="ScrollBar#PART_HorizontalScrollBar">
+            <Setter Property="AllowAutoHide" Value="True" />
+            <Setter Property="ShowDelay" Value="0:0:0.04" />
+            <Setter Property="HideDelay" Value="0:0:0.28" />
+            <Setter Property="Height" Value="14" />
+            <Setter Property="MinHeight" Value="14" />
+            <Setter Property="Margin" Value="6,0,6,4" />
+            <Setter Property="Background" Value="Transparent" />
+            <Setter Property="BorderBrush" Value="Transparent" />
+        </Style>
+
+        <!-- 左侧导航仅保留滚动行为语义，视觉统一走全局规则 -->
+        <Style Selector="ListBox.sidebar-nav">
+            <Setter Property="ScrollViewer.AllowAutoHide" Value="False" />
+            <Setter Property="ScrollViewer.IsScrollInertiaEnabled" Value="True" />
+            <Setter Property="ScrollViewer.IsScrollChainingEnabled" Value="False" />
+            <Setter Property="ScrollViewer.HorizontalScrollBarVisibility" Value="Disabled" />
+            <Setter Property="ScrollViewer.VerticalScrollBarVisibility" Value="Visible" />
+        </Style>
+
+        <Style Selector="ListBox.sidebar-nav /template/ ScrollViewer#PART_ScrollViewer">
+            <Setter Property="Background" Value="Transparent" />
         </Style>
     </Application.Styles>
 </Application>
