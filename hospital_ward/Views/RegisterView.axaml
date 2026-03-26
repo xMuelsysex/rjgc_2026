@@ -9,6 +9,10 @@ x:DataType="vm:RegisterViewModel"
 d:DesignHeight="600"
 d:DesignWidth="900"
 mc:Ignorable="d">
+    <UserControl.Resources>
+        <vm:SystemRoleDisplayConverter x:Key="SystemRoleDisplayConverter" />
+    </UserControl.Resources>
+
     <Border Background="#F3F4F6" Padding="40">
         <Border Width="460" Padding="28" CornerRadius="16" Background="White" HorizontalAlignment="Center" VerticalAlignment="Center">
             <StackPanel Spacing="12">

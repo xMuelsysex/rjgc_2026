@@ -1,0 +1,10 @@
+<Project>
+  <PropertyGroup>
+    <DisableAvaloniaFilePreview>true</DisableAvaloniaFilePreview>
+  </PropertyGroup>
+
+  <!-- Disable the Avalonia file preview host because it locks the output DLL during builds on Windows. -->
+  <Target Name="AvaloniaFilePreview" Condition="'$(DisableAvaloniaFilePreview)' == 'true'">
+    <Message Importance="Low" Text="Avalonia file preview is disabled for this project." />
+  </Target>
+</Project>
