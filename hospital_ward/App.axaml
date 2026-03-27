@@ -2,6 +2,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              x:Class="MyFirstApp.App"
              xmlns:local="using:MyFirstApp"
+             xmlns:behaviors="using:MyFirstApp.Behaviors"
              RequestedThemeVariant="Light">
 
     <Application.DataTemplates>
@@ -62,6 +63,95 @@
             <Setter Property="BorderBrush" Value="Transparent" />
         </Style>
 
+        <!-- 竖向滚动条柔化：上下端半圆收口，箭头与滑块都更圆润 -->
+        <Style Selector="ScrollBar#PART_VerticalScrollBar:vertical /template/ Border#VerticalRoot">
+            <Setter Property="CornerRadius" Value="7" />
+            <Setter Property="ClipToBounds" Value="True" />
+        </Style>
+
+        <Style Selector="ScrollBar#PART_VerticalScrollBar:vertical /template/ Rectangle#TrackRect">
+            <Setter Property="Fill" Value="Transparent" />
+            <Setter Property="Stroke" Value="Transparent" />
+        </Style>
+
+        <Style Selector="ScrollBar#PART_VerticalScrollBar:vertical /template/ Thumb">
+            <Setter Property="Width" Value="8" />
+            <Setter Property="MinHeight" Value="32" />
+            <Setter Property="CornerRadius" Value="999" />
+            <Setter Property="Background" Value="#C8CDD3" />
+            <Setter Property="RenderTransform" Value="none" />
+        </Style>
+
+        <Style Selector="ScrollBar#PART_VerticalScrollBar:vertical /template/ RepeatButton#PART_LineUpButton">
+            <Setter Property="TextElement.Foreground" Value="#D5D9DF" />
+        </Style>
+
+        <Style Selector="ScrollBar#PART_VerticalScrollBar:vertical /template/ RepeatButton#PART_LineDownButton">
+            <Setter Property="TextElement.Foreground" Value="#D5D9DF" />
+        </Style>
+
+        <Style Selector="ScrollBar#PART_VerticalScrollBar:vertical /template/ RepeatButton#PART_LineUpButton /template/ ContentPresenter#PART_ContentPresenter">
+            <Setter Property="CornerRadius" Value="7,7,0,0" />
+            <Setter Property="Background" Value="Transparent" />
+            <Setter Property="BorderBrush" Value="Transparent" />
+            <Setter Property="BorderThickness" Value="0" />
+        </Style>
+
+        <Style Selector="ScrollBar#PART_VerticalScrollBar:vertical /template/ RepeatButton#PART_LineDownButton /template/ ContentPresenter#PART_ContentPresenter">
+            <Setter Property="CornerRadius" Value="0,0,7,7" />
+            <Setter Property="Background" Value="Transparent" />
+            <Setter Property="BorderBrush" Value="Transparent" />
+            <Setter Property="BorderThickness" Value="0" />
+        </Style>
+
+        <Style Selector="ScrollBar#PART_VerticalScrollBar:vertical /template/ RepeatButton#PART_LineUpButton:pointerover">
+            <Setter Property="TextElement.Foreground" Value="#F8FAFC" />
+        </Style>
+
+        <Style Selector="ScrollBar#PART_VerticalScrollBar:vertical /template/ RepeatButton#PART_LineDownButton:pointerover">
+            <Setter Property="TextElement.Foreground" Value="#F8FAFC" />
+        </Style>
+
+        <Style Selector="ScrollBar#PART_VerticalScrollBar:vertical /template/ RepeatButton#PART_LineUpButton:pointerover /template/ ContentPresenter#PART_ContentPresenter">
+            <Setter Property="Background" Value="Transparent" />
+            <Setter Property="BorderBrush" Value="Transparent" />
+        </Style>
+
+        <Style Selector="ScrollBar#PART_VerticalScrollBar:vertical /template/ RepeatButton#PART_LineDownButton:pointerover /template/ ContentPresenter#PART_ContentPresenter">
+            <Setter Property="Background" Value="Transparent" />
+            <Setter Property="BorderBrush" Value="Transparent" />
+        </Style>
+
+        <Style Selector="ScrollBar#PART_VerticalScrollBar:vertical /template/ RepeatButton#PART_LineUpButton:pressed">
+            <Setter Property="TextElement.Foreground" Value="#FFFFFF" />
+        </Style>
+
+        <Style Selector="ScrollBar#PART_VerticalScrollBar:vertical /template/ RepeatButton#PART_LineDownButton:pressed">
+            <Setter Property="TextElement.Foreground" Value="#FFFFFF" />
+        </Style>
+
+        <Style Selector="ScrollBar#PART_VerticalScrollBar:vertical /template/ RepeatButton#PART_LineUpButton:pressed /template/ ContentPresenter#PART_ContentPresenter">
+            <Setter Property="Background" Value="Transparent" />
+            <Setter Property="BorderBrush" Value="Transparent" />
+        </Style>
+
+        <Style Selector="ScrollBar#PART_VerticalScrollBar:vertical /template/ RepeatButton#PART_LineDownButton:pressed /template/ ContentPresenter#PART_ContentPresenter">
+            <Setter Property="Background" Value="Transparent" />
+            <Setter Property="BorderBrush" Value="Transparent" />
+        </Style>
+
+        <Style Selector="ScrollBar#PART_VerticalScrollBar:vertical /template/ RepeatButton#PART_LineUpButton PathIcon">
+            <Setter Property="Width" Value="6" />
+            <Setter Property="Height" Value="6" />
+            <Setter Property="Opacity" Value="0.82" />
+        </Style>
+
+        <Style Selector="ScrollBar#PART_VerticalScrollBar:vertical /template/ RepeatButton#PART_LineDownButton PathIcon">
+            <Setter Property="Width" Value="6" />
+            <Setter Property="Height" Value="6" />
+            <Setter Property="Opacity" Value="0.82" />
+        </Style>
+
         <Style Selector="ScrollBar#PART_HorizontalScrollBar">
             <Setter Property="AllowAutoHide" Value="True" />
             <Setter Property="ShowDelay" Value="0:0:0.04" />
@@ -84,6 +174,9 @@
 
         <Style Selector="ListBox.sidebar-nav /template/ ScrollViewer#PART_ScrollViewer">
             <Setter Property="Background" Value="Transparent" />
+            <Setter Property="behaviors:SmoothScroll.IsEnabled" Value="True" />
+            <Setter Property="behaviors:SmoothScroll.WheelPixels" Value="64" />
+            <Setter Property="behaviors:SmoothScroll.Duration" Value="0:0:0.24" />
         </Style>
     </Application.Styles>
 </Application>
